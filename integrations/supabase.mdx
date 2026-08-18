@@ -1,0 +1,112 @@
+---
+title: "Integrate Supabase with Your Lovable App"
+sidebarTitle: "Supabase"
+description: "Add a PostgreSQL database, auth, file storage, and real-time features to your Lovable app — auto-provisioned or connect your own Supabase project."
+---
+
+Supabase is the backbone of every Lovable app that needs persistent data. When you build with Lovable, Supabase gives you a full PostgreSQL database, user authentication, file storage, and real-time subscriptions — all wired up automatically so you can focus on describing what your app should do instead of managing infrastructure.
+
+## Two ways to use Supabase
+
+<CardGroup cols={2}>
+  <Card title="Lovable Cloud (automatic)" icon="cloud" href="/integrations/overview">
+    Supabase is provisioned automatically when you enable Lovable Cloud. Describe what you need — user accounts, a product catalog, file uploads — and Lovable sets up the schemas, policies, and storage buckets for you.
+  </Card>
+  <Card title="Bring your own project" icon="key" href="/integrations/supabase">
+    Connect an existing Supabase project using your own API keys. You keep full control over your database, pricing tier, and region while Lovable generates all the code that talks to it.
+  </Card>
+</CardGroup>
+
+## Connect your own Supabase project
+
+If you already have a Supabase project, connect it to Lovable in a few steps:
+
+<Steps>
+  <Step title="Open your project settings">
+    Inside your Lovable project, click the **Settings** icon in the top-right corner to open project settings.
+  </Step>
+  <Step title="Navigate to Integrations → Supabase">
+    Select **Integrations** from the sidebar, then choose **Supabase**.
+  </Step>
+  <Step title="Enter your project credentials">
+    Paste your **Project URL** and **anon (public) key** from the Supabase dashboard. Find these under **Project Settings → API** in Supabase.
+  </Step>
+  <Step title="Save and confirm">
+    Click **Save**. Lovable verifies the connection and is ready to generate code against your project.
+  </Step>
+</Steps>
+
+<Warning>
+  Never expose your Supabase `service_role` key in client-side code. Lovable uses the `anon` key in the browser and handles Row Level Security (RLS) policies to control data access safely. The `service_role` key bypasses RLS entirely and should only ever be used in trusted server-side environments.
+</Warning>
+
+## Database
+
+Lovable generates PostgreSQL schemas automatically when you describe your data model. Tell Lovable "I need a table to store user profiles with a display name, avatar URL, and bio" and it creates the migration, types, and query logic for you.
+
+You can view and modify your schema in two ways:
+
+- **Code Mode** — open the project in Code Mode to inspect or edit migration files and TypeScript types directly.
+- **Supabase Studio** — log in to your Supabase project dashboard to browse tables, run SQL queries, and manage your data with a full GUI.
+
+<Tip>
+  Use Supabase Studio (your project's dashboard at supabase.com) to view, query, and manage your production data directly. It's the fastest way to inspect what's actually stored and run one-off queries without touching your app code.
+</Tip>
+
+## Authentication
+
+Lovable wires up authentication out of the box. Describe the sign-in experience you want and Lovable generates the full auth flow:
+
+<Tabs>
+  <Tab title="Email & Password">
+    Standard email and password registration with email verification. Lovable generates sign-up, sign-in, and password reset pages.
+  </Tab>
+  <Tab title="Magic Links">
+    Passwordless sign-in via email. Users receive a one-click link that logs them in without a password.
+  </Tab>
+  <Tab title="Google OAuth">
+    One-click Google sign-in. Lovable configures the OAuth provider in your Supabase project and generates the sign-in button and callback handling.
+  </Tab>
+</Tabs>
+
+**Row Level Security (RLS)** policies are applied automatically. Every table Lovable creates comes with sensible RLS defaults — users can only read and write their own data unless you explicitly grant broader access.
+
+## File storage
+
+Supabase Storage handles file uploads in your Lovable app. Ask Lovable to "add profile photo uploads" or "let users attach PDFs to their projects" and Lovable generates the storage bucket configuration, upload UI, and retrieval logic.
+
+Supported scenarios include:
+
+- **Profile images** — upload and display user avatars
+- **Document attachments** — attach PDFs, spreadsheets, and other files to records
+- **Media libraries** — store images and videos for content-heavy apps
+
+Access policies on storage buckets follow the same RLS approach as your database tables.
+
+## Real-time
+
+Supabase provides real-time subscriptions over WebSockets. Tell Lovable to "show new messages as they arrive" or "update the dashboard when a new order comes in" and Lovable subscribes to the relevant database changes and keeps your UI in sync without polling.
+
+Real-time is useful for:
+
+- **Chat and messaging** — display new messages instantly
+- **Live dashboards** — reflect database changes as they happen
+- **Collaborative editing** — show when another user is working on the same record
+- **Notifications** — surface alerts when a background job completes
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Lovable Cloud" icon="cloud" href="/integrations/overview">
+    Learn how Lovable Cloud provisions and manages your Supabase project automatically.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/features/security">
+    Explore authentication options and security best practices for your Lovable app.
+  </Card>
+  <Card title="Stripe Payments" icon="credit-card" href="/integrations/stripe-payments">
+    Add subscriptions and one-time payments to your Supabase-backed app.
+  </Card>
+  <Card title="GitHub Sync" icon="github" href="/integrations/github">
+    Push your Supabase-connected codebase to GitHub and collaborate with developers.
+  </Card>
+</CardGroup>

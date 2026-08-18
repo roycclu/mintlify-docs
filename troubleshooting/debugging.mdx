@@ -1,0 +1,179 @@
+---
+title: "Debugging Your Lovable App Effectively"
+sidebarTitle: "Debugging"
+description: "Practical techniques for diagnosing and fixing bugs in your Lovable app — from reading browser errors to using Supabase logs and Code Mode."
+---
+
+Debugging a Lovable app is a collaboration between you and the AI. Your job is to describe what's going wrong clearly and precisely — Lovable's job is to read the code, understand the context, and fix it. The better your bug report, the faster the fix. This page walks you through the most effective debugging techniques so you spend less time stuck and more time building.
+
+## Debugging Philosophy
+
+Lovable has full access to your project's code and can reason about it. When something breaks, don't just say "it's broken" — describe what you did, what you expected to happen, and what happened instead. That three-part structure gives Lovable enough context to identify the root cause rather than guessing.
+
+If the first fix attempt doesn't work, give Lovable the new error message or behavior. Each iteration narrows the problem down.
+
+## Using Browser DevTools
+
+Your browser's developer console is the first place to look when something goes wrong. It captures errors, warnings, and network activity that aren't visible in the app UI.
+
+<Steps>
+  <Step title="Open the developer console">
+    Press `F12` on Windows/Linux, or `Cmd+Option+I` on Mac. Click the **Console** tab. You can also right-click anywhere on the page and choose **Inspect → Console**.
+  </Step>
+  <Step title="Look for red error messages">
+    Red entries in the Console tab are JavaScript errors. They usually include the error type, a description, and the file and line number where it occurred. Copy the **full error text** — including the stack trace if there is one.
+  </Step>
+  <Step title="Check the Network tab for failed requests">
+    Click the **Network** tab and reload the page. Red entries here are failed HTTP requests — failed API calls, missing assets, or blocked requests. Click any red entry to see the response body, which often contains a more detailed error message from your backend or Supabase.
+  </Step>
+  <Step title="Share the error with Lovable">
+    Paste the full error text into Lovable's chat. Include the console error, any relevant network response, and what you were doing when it happened. Lovable will trace the error back to the source in your code.
+  </Step>
+</Steps>
+
+## Describing Bugs to Lovable
+
+How you describe a bug determines how quickly Lovable can fix it. A clear bug report gives Lovable the exact context it needs.
+
+**Use this format:**
+
+> "When I [action], [what actually happens]. I expected [expected behavior]. The console shows: [paste the exact error message]."
+
+**Examples:**
+
+<CodeGroup>
+```text Good bug report
+When I click the Save button on the profile page, nothing happens and the data isn't saved. 
+I expected the profile to update and show a success toast. 
+The console shows: POST https://xyz.supabase.co/rest/v1/profiles 403 (Forbidden)
+```
+
+```text Vague bug report — harder to fix
+The save button is broken. Please fix it.
+```
+</CodeGroup>
+
+**Additional tips:**
+- Attach a **screenshot** of the error state if there's a visual component — error messages, empty states, or broken layouts
+- Describe the **exact steps to reproduce** the bug: "Log in, go to Settings, change the display name, click Save"
+- If the bug only happens in certain conditions (logged out, on mobile, with specific data), say so
+
+## Built-in Browser Testing
+
+Lovable includes a **browser testing** feature that lets you automate UI flows without writing test code manually.
+
+Ask Lovable to run through a specific flow:
+
+> "Test the sign-up flow and check that a new user can create an account and reach the dashboard."
+
+Lovable will step through the UI automatically and report what it observes — including any errors or unexpected behavior it encounters. Use this to:
+- Verify that key flows work after making changes
+- Catch regressions when you modify shared components
+- Confirm that authentication, form submissions, and navigation all behave as expected
+
+<Tip>Run browser tests after significant changes to catch problems before your users do. Ask Lovable to "test the [feature] flow" after any update that touches authentication, forms, or navigation.</Tip>
+
+For more detail on the feature, see [Test your app in a browser](/features/browser-testing).
+
+## Debugging in Code Mode
+
+When an issue is subtle — wrong logic, a missing condition, an incorrect calculation — opening [Code Mode](/building/code-mode) lets you inspect the actual code Lovable generated.
+
+**What to look for:**
+- **Missing error handling:** API calls without `.catch()` blocks, or form submissions that don't handle failure states
+- **Hardcoded values:** URLs, IDs, or credentials that were meant to come from environment variables
+- **Logic errors:** Conditions that are inverted, off-by-one errors in loops, or state that's read before it's set
+- **Loading states:** Components that render before data has loaded, causing `undefined` property access errors
+
+You can fix small, targeted bugs directly in Code Mode without involving the AI. For larger issues, use Code Mode to identify the problematic section and then describe it to Lovable in chat: "The issue is in the `handleSave` function in `ProfileSettings.tsx` — it's calling `update()` before the user ID is loaded."
+
+## Debugging Supabase
+
+Database and authentication errors often originate in Supabase rather than your frontend code. Supabase Studio has dedicated tools to help you investigate.
+
+<AccordionGroup>
+  <Accordion title="Check Supabase logs for database errors">
+    In [Supabase Studio](https://supabase.com/dashboard), navigate to **Logs → Postgres Logs**. Filter by timeframe to find queries that failed during the period when your bug occurred. The logs show the exact SQL that ran, the error code, and the reason for the failure.
+  </Accordion>
+
+  <Accordion title="Verify RLS policies">
+    Row Level Security (RLS) policies control who can read and write each table. A policy that's too restrictive will silently block writes — the operation will appear to succeed in your app but the data won't be saved.
+
+    Go to **Table Editor → [your table] → Policies** in Supabase Studio. Check that:
+    - Policies exist for the operations you're performing (`SELECT`, `INSERT`, `UPDATE`, `DELETE`)
+    - The policy conditions match the auth state of your users (e.g., `auth.uid() = user_id` for user-owned rows)
+    - RLS is enabled on the table if you have policies, or intentionally disabled if you want open access
+  </Accordion>
+
+  <Accordion title="Test queries in the SQL editor">
+    The Supabase SQL editor lets you run raw queries against your database. Use it to verify that data exists, test whether a query returns the results you expect, and check whether RLS policies are blocking access for a specific user.
+
+    Navigate to **SQL Editor** in Supabase Studio and run queries directly. You can also use `SET LOCAL role = authenticated; SET LOCAL request.jwt.claim.sub = 'your-user-id';` to simulate an authenticated user session in the editor.
+  </Accordion>
+</AccordionGroup>
+
+## Common Error Patterns
+
+These are the errors Lovable users encounter most often, with what each one means and how to address it.
+
+<AccordionGroup>
+  <Accordion title="401 Unauthorized">
+    The request was made without valid authentication credentials, or the user's session has expired.
+
+    **What to check:**
+    - Verify that the user is logged in before the request fires
+    - Check whether the auth token is being included in the request headers — Lovable's Supabase integration handles this automatically, but custom API calls may not
+    - Check the Supabase auth logs for the specific failure reason
+  </Accordion>
+
+  <Accordion title="403 Forbidden">
+    The user is authenticated, but an RLS policy is preventing the operation.
+
+    **What to check:**
+    - Open Supabase Studio → **Table Editor → [table] → Policies**
+    - Verify that a policy exists for the operation type (`INSERT`, `UPDATE`, etc.)
+    - Check that the policy condition evaluates to `true` for this user — test it in the SQL editor
+  </Accordion>
+
+  <Accordion title="500 Internal Server Error">
+    An error occurred on the server — in Supabase, this typically means a database function, trigger, or edge function threw an exception.
+
+    **What to check:**
+    - Open Supabase Studio → **Logs → Postgres Logs** and filter to the time of the error
+    - Look for failed database functions or triggers that might be firing on the affected table
+    - Check **Edge Functions → Logs** if you have serverless functions deployed
+  </Accordion>
+
+  <Accordion title="Cannot read properties of undefined (reading 'x')">
+    Your code is trying to access a property on a value that hasn't loaded yet — typically `null` or `undefined` when async data is still in flight.
+
+    **What to check:**
+    - Find the component that renders the data and verify it shows a loading state while data is being fetched
+    - Add optional chaining (`?.`) to guard property access: `user?.profile?.name` instead of `user.profile.name`
+    - Ask Lovable: "Fix undefined property errors in [component name] — add proper loading states and null checks"
+  </Accordion>
+
+  <Accordion title="CORS error (blocked by CORS policy)">
+    Your frontend is trying to call an API that hasn't allowed requests from your app's domain.
+
+    **What to check:**
+    - Verify that the API endpoint you're calling allows requests from your Lovable app's domain
+    - If you control the API, add your app's URL to the allowed origins
+    - If you're calling a third-party API that doesn't support CORS from browsers, you'll need to route the request through a Supabase Edge Function instead
+  </Accordion>
+</AccordionGroup>
+
+## When to Ask for Help
+
+Most bugs can be resolved by sharing the error message with Lovable and iterating a couple of times. If you've tried that and the problem persists:
+
+<CardGroup cols={2}>
+  <Card title="Discord Community" icon="discord" href="https://discord.com/invite/lovable-dev">
+    Post your issue in the Lovable Discord — thousands of active builders have likely seen similar problems and can help you unblock quickly.
+  </Card>
+  <Card title="Prompting Best Practices" icon="lightbulb" href="/building/prompting-tips">
+    Review how to write better prompts for debugging scenarios — the right framing gets you to a fix faster.
+  </Card>
+</CardGroup>
+
+For account, billing, and platform issues that can't be resolved through debugging, see the [Support](/troubleshooting/support) page.

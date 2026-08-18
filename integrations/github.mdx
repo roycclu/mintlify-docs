@@ -1,0 +1,119 @@
+---
+title: "Sync Your Lovable Project with GitHub"
+sidebarTitle: "GitHub"
+description: "Own your code from day one. Sync every Lovable build to GitHub so your team can review, extend, and deploy on any platform that runs React apps."
+---
+
+Every app you build in Lovable is a standard React + Tailwind + Supabase project — and it's yours. GitHub sync connects your Lovable project to a repository so every build is committed automatically, your engineering team can collaborate on the same codebase, and you can deploy anywhere React apps run.
+
+<Note>
+  GitHub sync is available on all plans including Free. You are never locked in to Lovable — the code is a fully standard React project that any developer can pick up and run.
+</Note>
+
+## Connect GitHub
+
+<Steps>
+  <Step title="Open project settings">
+    Inside your Lovable project, click the **Settings** icon in the top-right corner.
+  </Step>
+  <Step title="Navigate to Integrations → GitHub">
+    Select **Integrations** from the sidebar, then choose **GitHub**.
+  </Step>
+  <Step title="Authorize Lovable">
+    Click **Connect GitHub** and complete the OAuth authorization flow. Lovable requests permission to read your repositories and push commits on your behalf.
+  </Step>
+  <Step title="Choose a repository">
+    Select an existing repository to sync to, or let Lovable create a new one. If you create a new repo, choose a name and whether it should be public or private.
+  </Step>
+  <Step title="Enable sync">
+    Toggle **Enable sync** on. Lovable pushes the current project state immediately, then commits every subsequent build automatically.
+  </Step>
+</Steps>
+
+## How sync works
+
+Every time Lovable makes a change to your app — in response to a chat message, a visual edit, or a Code Mode change — it commits that change to your connected repository. The commit message describes what Lovable did, making it easy to follow the history.
+
+Pull the repository locally at any time to get the latest version of your code:
+
+```bash
+git clone https://github.com/your-org/your-project.git
+cd your-project
+npm install
+npm run dev
+```
+
+## Bi-directional sync
+
+GitHub sync works in both directions. Changes you make directly in your repository — fixing a bug, refactoring a component, updating a dependency — can be pulled back into Lovable.
+
+To pick up changes from GitHub inside the Lovable editor:
+
+1. Push your changes to the connected branch on GitHub.
+2. Open your project in Lovable.
+3. Click **Pull from GitHub** in the project menu to sync the latest commits into the editor.
+
+Lovable then reflects your changes and can continue building on top of them.
+
+## Working with developers
+
+Once your project is synced to GitHub, share the repository with your engineering team. The codebase is plain React — no proprietary framework, no special build tooling. Any developer who knows React can:
+
+- Read the component tree and understand the structure
+- Add new routes, pages, or features in their editor of choice
+- Integrate existing internal libraries or design systems
+- Extend the Supabase schema with custom migrations
+- Write unit or integration tests alongside Lovable-generated code
+
+Developers interact with the repo exactly as they would any other project. They don't need a Lovable account to contribute.
+
+## PR workflow
+
+Engineers can open pull requests against your Lovable-generated code just like any other repository. A common workflow looks like:
+
+<Steps>
+  <Step title="Lovable builds the feature">
+    Describe what you want in Lovable. It builds and commits the feature to the main branch (or a branch of your choice).
+  </Step>
+  <Step title="Developer reviews and extends">
+    Your engineer pulls the branch, reviews the generated code, and opens a PR with any refinements or additions.
+  </Step>
+  <Step title="Merge and continue">
+    Merge the PR. Lovable picks up the merged changes on the next pull, and you can keep iterating from where the developer left off.
+  </Step>
+</Steps>
+
+## GitLab
+
+Lovable also supports **GitLab** as a sync target. The setup flow is identical — open project settings, choose GitLab instead of GitHub, authorize Lovable, and select a repository. Everything described above applies equally to GitLab projects.
+
+## Deploying outside Lovable Cloud
+
+Once your project is synced to GitHub, you can deploy it to any platform that supports React and Node:
+
+<CardGroup cols={3}>
+  <Card title="Vercel" icon="triangle" href="https://vercel.com">
+    Import the GitHub repo and deploy with zero configuration. Vercel detects the Vite/React setup automatically.
+  </Card>
+  <Card title="Netlify" icon="globe" href="https://netlify.com">
+    Connect the repo and configure the build command (`npm run build`) and publish directory (`dist`).
+  </Card>
+  <Card title="Any Node host" icon="server" href="/tips-tricks/external-deployment-hosting">
+    Run the build output on Fly.io, Railway, Render, or any host that serves static files or Node apps.
+  </Card>
+</CardGroup>
+
+<Tip>
+  If you deploy outside Lovable Cloud, you'll need to manage your Supabase environment variables (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`) in your hosting platform's environment settings.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Supabase" icon="database" href="/integrations/supabase">
+    Your database, auth, and storage layer — understand how Supabase fits into the Lovable stack.
+  </Card>
+  <Card title="Code Mode" icon="code" href="/features/code-mode">
+    Edit your project's source files directly in Lovable before or after pushing to GitHub.
+  </Card>
+</CardGroup>

@@ -1,0 +1,140 @@
+---
+title: "Set Up SSO and SCIM for Enterprise Teams"
+sidebarTitle: "SSO & SCIM"
+description: "Enforce SSO via SAML 2.0 or OIDC and automate user provisioning with SCIM. Supports Okta, Entra ID, and Google Workspace on Business and Enterprise plans."
+---
+
+If your organization manages employee identities through a central directory — Okta, Microsoft Entra (Azure AD), Google Workspace, or another compatible provider — you can connect that directory to Lovable. Single Sign-On (SSO) means your team logs in with the credentials they already use, enforced by your IdP's policies. SCIM provisioning means accounts are created and deactivated automatically when employees join or leave, removing the manual overhead of inviting and removing users one by one.
+
+<Note>
+  SSO and SCIM are available on Business and Enterprise plans. [Contact sales](https://lovable.dev/enterprise-form) for Enterprise pricing.
+</Note>
+
+## Single Sign-On (SSO)
+
+### Supported Protocols and Providers
+
+Lovable supports both **SAML 2.0** and **OIDC** for SSO. The following identity providers are tested and supported out of the box:
+
+- **Okta**
+- **Microsoft Entra ID** (formerly Azure AD)
+- **Google Workspace**
+- Any SAML 2.0-compatible or OIDC-compatible IdP
+
+### What SSO Enforces
+
+When you enforce SSO for your workspace:
+
+- All members must authenticate through your IdP to access Lovable.
+- Password-only login is disabled for workspace members.
+- Your IdP's MFA policies, session lengths, and conditional access rules apply automatically.
+- New members provisioned through your IdP are added to the workspace without needing a separate Lovable invitation.
+
+### How to Configure SSO
+
+<Warning>
+  Before enforcing SSO, test the connection with a test account that does not belong to your own admin user. Enforcing SSO without testing can lock all users — including yourself — out of the workspace.
+</Warning>
+
+<Steps>
+  <Step title="Go to Workspace Settings → Security → SSO">
+    Navigate to your workspace settings, open the **Security** tab, and select **SSO**.
+  </Step>
+  <Step title="Choose your identity provider">
+    Select your provider from the list (Okta, Microsoft Entra, Google Workspace) or choose **Custom SAML / OIDC** for any other compatible provider.
+  </Step>
+  <Step title="Enter your IdP metadata or endpoint">
+    For SAML providers: paste your IdP metadata XML or enter the metadata URL.
+
+    For OIDC providers: enter your discovery URL (`.well-known/openid-configuration` endpoint), client ID, and client secret.
+
+    Lovable's service provider metadata — including the ACS URL and Entity ID you'll need to register in your IdP — is displayed on this screen.
+  </Step>
+  <Step title="Register Lovable in your IdP">
+    In your identity provider's admin console, create a new application or integration using Lovable's SP metadata. Map the required attributes:
+
+    | Attribute | Expected value |
+    |---|---|
+    | `email` | User's email address |
+    | `firstName` | User's first name |
+    | `lastName` | User's last name |
+  </Step>
+  <Step title="Test the connection">
+    Use the **Test Connection** button in Lovable's SSO settings. A test login opens in a new tab. Confirm that your test account can authenticate successfully before proceeding.
+  </Step>
+  <Step title="Enforce SSO for all members">
+    Once the test passes, toggle **Enforce SSO**. From this point forward, all workspace members must log in through your IdP.
+  </Step>
+</Steps>
+
+## SCIM Provisioning
+
+SCIM (System for Cross-domain Identity Management) automates user lifecycle management. When an employee is added to your IdP directory, their Lovable workspace account is created automatically. When they leave and are removed from your IdP, their Lovable access is revoked immediately — no manual cleanup required.
+
+### Supported Providers
+
+- **Okta** (SCIM 2.0)
+- **Microsoft Entra ID** (SCIM 2.0)
+- Any SCIM 2.0-compatible identity provider
+
+### How to Set Up SCIM
+
+<Steps>
+  <Step title="Go to Workspace Settings → Security → SCIM">
+    Open the **Security** tab in Workspace Settings and select **SCIM**.
+  </Step>
+  <Step title="Generate a SCIM bearer token">
+    Click **Generate token**. Copy the token — it is only shown once. Store it securely; you'll need it in your IdP.
+  </Step>
+  <Step title="Note your SCIM endpoint URL">
+    Lovable displays a SCIM 2.0 base URL on the same screen (e.g., `https://lovable.dev/scim/v2/{workspace-id}`). Copy this as well.
+  </Step>
+  <Step title="Configure your IdP">
+    In your identity provider's provisioning settings for the Lovable application:
+
+    - Set the **SCIM connector base URL** to the endpoint URL from the previous step.
+    - Set the **authentication mode** to Bearer Token and paste the token you generated.
+    - Enable the provisioning actions your organization requires: Create Users, Update User Attributes, Deactivate Users.
+  </Step>
+  <Step title="Assign users or groups">
+    In your IdP, assign the users or groups that should have access to Lovable. SCIM will push those users to your workspace automatically.
+  </Step>
+  <Step title="Verify provisioning">
+    Check the **Members** tab in Workspace Settings to confirm that assigned users have appeared with the correct roles.
+  </Step>
+</Steps>
+
+### Syncing Groups to Lovable Roles
+
+If your IdP supports group-to-role mapping, you can assign Lovable roles automatically based on IdP group membership.
+
+| IdP Group (example) | Lovable Role |
+|---|---|
+| `lovable-admins` | Admin |
+| `lovable-editors` | Editor |
+| `lovable-viewers` | Viewer |
+
+Configure the mapping in your IdP's attribute statements or group assignments. When a user's group changes in your IdP, their Lovable role updates automatically on the next SCIM sync.
+
+## Role-Based Access Controls
+
+With SSO and SCIM in place, permissions are still governed by Lovable's role system — but now roles can be assigned and updated automatically from your IdP rather than managed manually.
+
+Permissions are enforced server-side at request time. No client-side manipulation can bypass them. On Enterprise plans, editing, approving, and publishing are separate roles, giving you a full approval workflow before changes go live.
+
+For a full description of each role and what it can do, see [Collaboration](/workspace/collaboration).
+
+<CardGroup cols={2}>
+  <Card title="Collaboration" icon="users" href="/workspace/collaboration">
+    Learn about roles, inviting members, and managing permissions in detail.
+  </Card>
+  <Card title="Security" icon="lock" href="/workspace/security">
+    Review security scanning, compliance certifications, and audit logs.
+  </Card>
+  <Card title="Workspace Overview" icon="house" href="/workspace/overview">
+    Understand workspace structure, project management, and settings.
+  </Card>
+  <Card title="Plans & Credits" icon="credit-card" href="/introduction/plans-and-credits">
+    Compare Business and Enterprise plans and understand credit pricing.
+  </Card>
+</CardGroup>

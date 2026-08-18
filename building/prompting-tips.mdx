@@ -1,0 +1,124 @@
+---
+title: "Prompting Best Practices for Building with Lovable"
+sidebarTitle: "Prompting Tips"
+description: "Write prompts that get great results faster. Specific, goal-oriented prompts reduce back-and-forth and help Lovable build exactly what you envision."
+---
+
+The quality of what Lovable builds is directly shaped by the quality of your prompt. A vague request produces a generic result; a specific, context-rich request produces something close to what you imagined on the first try. The patterns below will help you get the most out of every message — whether you're starting from scratch, refining an existing feature, or debugging an unexpected behavior.
+
+## Be specific about the end result
+
+Describe what the user will see and do — not the implementation details. Lovable knows how to write React, Tailwind, and Supabase; it just needs to understand what the finished experience looks like.
+
+<Tabs>
+  <Tab title="Less effective">
+    > "Make it better."
+
+    > "Fix the navigation."
+
+    > "Improve the dashboard."
+
+    These prompts don't give Lovable enough information to know what "better" means in your context. The result will likely be a guess.
+  </Tab>
+  <Tab title="More effective">
+    > "Add a sidebar navigation with icons for Dashboard, Projects, and Settings. Highlight the active item with an orange left border and bold text. Collapse the sidebar to icon-only on screens narrower than 768px."
+
+    > "The top navigation is missing a user avatar in the top-right corner. Add a circular avatar that shows the user's initials if no photo is set, with a dropdown menu containing Profile and Sign Out options."
+
+    These prompts tell Lovable exactly what to build and how it should behave.
+  </Tab>
+</Tabs>
+
+## Provide context
+
+Lovable can work from more than just text. Attach screenshots, wireframes, Figma exports, or design references directly in the chat to give the AI a visual target.
+
+<Note>
+  You can attach images directly in the chat input — drag and drop or click the attachment icon. This works for screenshots of existing UI you want to match, wireframe sketches, design mockups, or even error screenshots when debugging.
+</Note>
+
+You can also paste text context — Notion docs, PRD excerpts, API documentation, or error messages — directly into your message. Lovable reads the full context of your message before generating anything.
+
+## One thing at a time
+
+Prompts that ask for many unrelated changes are harder to validate and more likely to produce partial results. Break large features into focused steps.
+
+<Tabs>
+  <Tab title="Hard to validate">
+    > "Add authentication, a user dashboard, a settings page, Stripe billing, and email notifications."
+
+    If any part of this goes wrong, it's hard to know which change caused the issue — and reverting is more disruptive.
+  </Tab>
+  <Tab title="Easier to build and check">
+    Send these as separate messages, reviewing the result after each one:
+    1. "Add email/password authentication with sign-up and login pages."
+    2. "After a user logs in, redirect them to a dashboard page that shows their name and account creation date."
+    3. "Add a Settings page with fields to update display name and email address."
+  </Tab>
+</Tabs>
+
+## Reference existing elements precisely
+
+When modifying something that already exists in your app, name it specifically. Vague references like "the button" or "the form" are ambiguous in an app with multiple buttons or forms.
+
+- ✅ "The blue **Submit** button at the bottom of the onboarding form"
+- ✅ "The **sidebar navigation** on the left side of the dashboard"
+- ✅ "The **Project Title** field in the new project modal"
+- ❌ "The button" — which one?
+- ❌ "The card" — there are five cards on the page
+
+## Describe bugs clearly
+
+When something isn't working, give Lovable the same information you'd give a developer: what you expected, what actually happened, and any error message you saw.
+
+**Effective bug prompt format:**
+
+> "When I click **Submit** on the contact form, the form doesn't save and the page doesn't show a success message. The browser console shows: `TypeError: Cannot read properties of undefined (reading 'id')`. I expected the form data to be saved to the `contacts` table in Supabase and a success toast to appear."
+
+This tells Lovable the exact failure point, the error, and the intended behavior — everything needed to diagnose and fix the issue accurately.
+
+## Use Plan Mode first for complex builds
+
+Before starting a large feature — a new section of your app, a multi-step flow, or a complex integration — switch to [Plan Mode](/building/plan-mode) and ask Lovable to outline the approach. A quick planning conversation surfaces edge cases and dependencies before you spend build credits, and it gives you a clear roadmap to follow in Agent Mode.
+
+## Prompt examples by use case
+
+<AccordionGroup>
+  <Accordion title="Starting a new app">
+    > "Build a project management app for small teams. It should have a dashboard showing active projects, a project detail page with a task list where tasks can be marked complete, and user authentication so each person only sees their own projects. Use a clean, minimal design with a white background and blue accents."
+  </Accordion>
+  <Accordion title="Adding authentication">
+    > "Add Supabase authentication to this app. I need an email/password sign-up page, a login page, a password reset flow, and a protected route that redirects unauthenticated users to login. Show the current user's email in the top navigation after login."
+  </Accordion>
+  <Accordion title="Connecting to an external API">
+    > "Add a weather widget to the dashboard. It should call the OpenWeatherMap API using the key stored in the OPENWEATHER_API_KEY environment variable, display the current temperature and conditions for the user's saved city, and refresh automatically every 10 minutes."
+  </Accordion>
+  <Accordion title="Fixing a specific bug">
+    > "The task list on the project detail page doesn't update when I mark a task complete. After clicking the checkbox, the task still appears unchecked. The console shows no errors. I expected the checkbox to toggle and the task to be updated in the database."
+  </Accordion>
+  <Accordion title="Changing the design">
+    > "Restyle the pricing page cards to match the attached screenshot. Each card should have a rounded border, a subtle drop shadow, the plan name in large bold text at the top, and a highlighted 'Most Popular' badge on the middle tier. Keep the current layout but update the colors to match our brand: primary #6366F1, text #111827."
+  </Accordion>
+</AccordionGroup>
+
+## Quick reference checklist
+
+Before sending a prompt, run through this mental checklist:
+
+<Steps>
+  <Step title="Am I describing what the user experiences?">
+    Focus on the visible result, not the implementation.
+  </Step>
+  <Step title="Is this one focused change?">
+    Split multi-feature requests into separate messages.
+  </Step>
+  <Step title="Have I named specific elements?">
+    Use the exact name or location of the UI element you're referring to.
+  </Step>
+  <Step title="For bugs: have I included the error message?">
+    Paste the console error, describe what you expected, and describe what happened instead.
+  </Step>
+  <Step title="Should I use Plan Mode first?">
+    If the task feels large or ambiguous, spend one Plan Mode message aligning on the approach before building.
+  </Step>
+</Steps>

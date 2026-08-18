@@ -1,0 +1,203 @@
+---
+title: "Connect 80+ Tools to Your Lovable App"
+sidebarTitle: "Connectors"
+description: "Pre-built connectors let your Lovable app read and write data from external services. OAuth, token refresh, and security are all handled for you."
+---
+
+Connectors are pre-built integrations that let your Lovable app exchange data with the tools your users and team already rely on. Lovable handles every part of the authentication and security layer — OAuth handshakes, token storage, token refresh, and revocation — so your API credentials never appear in your app code or client bundle.
+
+<Note>
+  Connectors don't cost credits. Credits are only used when Lovable generates or modifies your app's code. Connecting to tools is always free.
+</Note>
+
+## Add a connector
+
+<Steps>
+  <Step title="Open your project in Lovable">
+    Navigate to the project you want to add a connector to from your Lovable dashboard.
+  </Step>
+  <Step title="Open the Connectors panel">
+    Click the **Connectors** button in the project toolbar. You can also describe what you want in chat: *"Connect this to my Google Sheet"* or *"Add a Slack notification when a new user signs up"* — Lovable will open the right connector for you.
+  </Step>
+  <Step title="Select the tool">
+    Browse the connector catalog and click the tool you want to connect. Use the search bar to find it quickly.
+  </Step>
+  <Step title="Authenticate with OAuth">
+    Click **Connect** and complete the OAuth flow for the service. Your credentials are stored securely in Lovable's gateway — they are never written into your app's code.
+  </Step>
+  <Step title="Describe how you want to use it">
+    Back in the Lovable chat, tell Lovable what you want to build. For example:
+    - *"Show my last 10 Gmail messages in a list"*
+    - *"Post a Slack message to #alerts when an order is placed"*
+    - *"Read data from the 'Inventory' sheet and display it in a table"*
+
+    Lovable generates the code that reads from or writes to the connected service.
+  </Step>
+</Steps>
+
+## Per-user connections
+
+When you build a multi-user app, each person who signs in connects their own accounts — their Google Drive, their CRM, their calendar. Lovable's gateway handles OAuth, token refresh, and revocation for every user independently.
+
+This means your app can show Alice her Drive files and Bob his Drive files without your code ever handling either person's credentials. The gateway manages all of it.
+
+## Background jobs
+
+Connectors work even when your users are offline. Scheduled syncs and background jobs run continuously, so you can build:
+
+- **Invoice chasers** that check Stripe for overdue payments and send Gmail follow-ups overnight
+- **Anomaly detectors** that query Snowflake every hour and post to Slack if a metric breaks its bounds
+- **CRM syncs** that pull new HubSpot contacts into your database on a schedule
+- **Report generators** that write summaries to Google Docs every morning
+
+Lovable monitors your connections and flags anything that needs attention.
+
+## Custom connections via MCP
+
+If the tool you need isn't in the catalog but has an MCP (Model Context Protocol) server, add it via **Connect it yourself** in the connector panel. See the [MCP Servers guide](/integrations/mcp-server) for details.
+
+## Full connector catalog
+
+<Tabs>
+  <Tab title="Productivity">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **Gmail** | Read, send, and label mail |
+    | **Google Calendar** | Read and write events |
+    | **Google Docs** | Create and edit documents |
+    | **Google Drive** | List, search, and read files |
+    | **Google Sheets** | Read and write spreadsheet data |
+    | **Google Slides** | Read deck content |
+    | **Microsoft Excel** | Work with spreadsheets and data |
+    | **Microsoft OneDrive** | Access files and folders |
+    | **Microsoft OneNote** | Capture notes and notebooks |
+    | **Microsoft Outlook** | Manage email and calendars |
+    | **Microsoft PowerPoint** | Create and edit presentations |
+    | **Microsoft SharePoint** | Browse sites, libraries, and lists |
+    | **Microsoft Teams** | Collaborate in chats and channels |
+    | **Microsoft Word** | Create and edit documents |
+    | **Notion** | Build from your team's docs and wikis |
+    | **Airtable** | Spreadsheet-database hybrid and automation |
+    | **Miro** | Turn workshop boards into working prototypes |
+    | **Granola** | Pull action items from meetings |
+  </Tab>
+  <Tab title="Project Management & CRM">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **Linear** | Read and write issues, cycles, and projects |
+    | **Asana** | Read tasks, projects, and assignees |
+    | **Atlassian (Jira/Confluence)** | Turn Jira specs into working software |
+    | **HubSpot** | Connect CRM, marketing, and sales workflows |
+    | **Salesforce** | Connect your Salesforce CRM data |
+    | **Pipedrive** | Manage deals, contacts, and pipelines |
+    | **Zoho CRM** | Read and manage leads, contacts, and deals |
+    | **Ashby** | Run recruiting and hiring workflows |
+    | **Attention** | Conversation intelligence for calls and transcripts |
+    | **Calendly** | Build booking flows and meeting dashboards |
+  </Tab>
+  <Tab title="Commerce & Finance">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **Stripe** | Accept payments, billing, and subscriptions |
+    | **Shopify** | Build on storefront, products, and orders |
+    | **WooCommerce** | Manage products, orders, and customers |
+    | **Chargebee** | Manage subscriptions and billing |
+    | **Xero** | Invoices, bills, and financial reports |
+    | **Zoho Books** | Customers, invoices, and expenses |
+    | **Wix** | Sites, ecommerce, bookings, and CMS |
+    | **Lightspeed** | Products, inventory, and sales |
+    | **Lexware** | Contacts, invoices, and accounting events |
+    | **Sevdesk** | Contacts, invoices, and orders |
+    | **Wave** | Customers, products, and invoices |
+    | **Polar.sh** | Revenue dashboards and subscriber tools |
+    | **PrestaShop** | Catalog, orders, and customers |
+  </Tab>
+  <Tab title="Analytics & Data">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **Google Analytics** | Track page views, events, and conversions |
+    | **Amplitude** | Spot what users actually do |
+    | **PostHog** | Analytics, feature flags, and experiments |
+    | **BigQuery** | Build dashboards on live warehouse data |
+    | **Snowflake** | Surface live results from your data warehouse |
+    | **Databricks** | Turn SQL warehouses into live apps |
+    | **Semrush** | SEO, keyword research, and competitive analysis |
+    | **Google Search Console** | Read analytics and manage sites |
+    | **Algolia** | AI search and discovery |
+    | **Hex** | Work with notebooks and analytics projects |
+  </Tab>
+  <Tab title="Communication">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **Slack** | Read messages, post updates, and send notifications |
+    | **Resend** | Send transactional email at scale |
+    | **Mailgun** | Send transactional email and track delivery |
+    | **Brevo** | Email, SMS, and marketing automation |
+    | **Twilio** | SMS, voice calls, and two-way messaging |
+    | **Telegram** | Messages and bot workflows |
+    | **GatewayAPI** | Send SMS and RCS messages |
+    | **LinkedIn** | Profile and posting integrations |
+    | **TikTok** | Creator profiles and published videos |
+    | **Twitch** | Streams, channels, and viewer data |
+    | **X (Twitter)** | User lookup and recent public posts |
+  </Tab>
+  <Tab title="AI & Automation">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **n8n** | Automate across 400+ services |
+    | **ElevenLabs** | Add human-sounding voice to your app |
+    | **Replicate** | Run AI models for images, video, audio, and text |
+    | **Perplexity** | Add real-time web search with cited sources |
+    | **Firecrawl** | Scrape websites into clean, structured data |
+    | **Inngest** | Durable workflows and background jobs |
+    | **HeyGen MCP** | AI avatar and video generation |
+    | **Apify** | Run Actors and access web scraping datasets |
+    | **Gemini Enterprise** | Search and summarize across Google data sources |
+  </Tab>
+  <Tab title="Content & Developer">
+    | Connector | What you can do |
+    |-----------|----------------|
+    | **GitHub** | Read repos, issues, and pull requests |
+    | **Supabase** | Postgres database, auth, and storage |
+    | **AWS S3** | Store and retrieve files from S3 buckets |
+    | **Sentry** | Track errors, issues, and performance |
+    | **Aikido** | Application security scanning |
+    | **Contentful** | Build around your existing content model |
+    | **Storyblok** | Content-driven experiences with your CMS |
+    | **Sanity** | Content-driven apps with your Sanity schema |
+    | **WordPress.com** | Read posts, pages, and media |
+    | **Tally** | Create forms and fetch submissions |
+    | **Figma MCP** | Design context through the Figma chat connector |
+    | **Google Maps** | Interactive maps, address search, and routing |
+    | **Mapbox** | Interactive maps, geocoding, and routing |
+    | **Wiz** | Cloud security and posture management |
+  </Tab>
+</Tabs>
+
+## What you can build
+
+<CardGroup cols={2}>
+  <Card title="Automated agents" icon="robot" href="/integrations/connectors">
+    Build apps that work around the clock. Chase overdue invoices, draft follow-ups, reschedule missed meetings — all while you're offline.
+  </Card>
+  <Card title="Team productivity tools" icon="users" href="/integrations/connectors">
+    Pull Linear issues, Figma frames, and Slack threads into a single view. Each teammate sees only what they're allowed to see, scoped by their own connected accounts.
+  </Card>
+  <Card title="Internal dashboards" icon="chart-bar" href="/integrations/connectors">
+    Surface live Snowflake, BigQuery, or Databricks data in a polished UI. Schedule nightly jobs that flag anomalies before anyone has to ask.
+  </Card>
+  <Card title="Customer-facing apps" icon="globe" href="/integrations/overview">
+    Let your users connect their own CRM, calendar, or Drive. Lovable's gateway handles every user's OAuth flow independently.
+  </Card>
+</CardGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="MCP Server" icon="server" href="/integrations/mcp-server">
+    Connect tools that aren't in the catalog using the Model Context Protocol.
+  </Card>
+  <Card title="Integrations overview" icon="grid-2" href="/integrations/overview">
+    See how connectors, MCP, Supabase, and GitHub fit together.
+  </Card>
+</CardGroup>

@@ -1,0 +1,155 @@
+---
+title: "Manage Your Lovable Workspace and Projects"
+sidebarTitle: "Overview"
+description: "Your Lovable workspace holds every project, member, and setting in one place. Learn how to organize projects, manage credits, and keep your team aligned."
+---
+
+Your workspace is your home in Lovable — the organization-level container that holds all your projects, team members, billing, and configuration. Think of it like a company account: every project you build lives inside a workspace, and everyone you invite shares its resources. Whether you're a solo builder or running a team of dozens, understanding the workspace structure helps you stay organized, control costs, and set standards that carry across every app you ship.
+
+## Workspace vs. Project
+
+A **workspace** is the top-level organizational unit. It contains:
+
+- All projects your team creates
+- Members and their roles
+- Billing and credit balance
+- Workspace-level settings (design systems, knowledge, connectors)
+
+A **project** is an individual app or website. Each project has its own codebase, deployment, and configuration, but it inherits workspace-level design systems, knowledge, and connector access set by admins.
+
+<Info>
+  Every Lovable plan belongs to a workspace. Credits are shared across all members of the workspace, not allocated per person.
+</Info>
+
+## Creating and Switching Workspaces
+
+Lovable creates your first workspace automatically when you sign up. If you need a separate environment — for a different team, client, or business unit — you can create additional workspaces from your account menu.
+
+<Steps>
+  <Step title="Open your account menu">
+    Click your workspace name in the top-left corner of the Lovable dashboard.
+  </Step>
+  <Step title="Select Create new workspace">
+    Choose **Create new workspace** from the dropdown. Give it a name that reflects its purpose (e.g., your company name, client name, or team).
+  </Step>
+  <Step title="Configure workspace settings">
+    Add a logo, set notification preferences, and invite your first members. You can update these settings any time under **Workspace Settings**.
+  </Step>
+  <Step title="Switch between workspaces">
+    Use the same workspace switcher in the top-left to jump between workspaces at any time.
+  </Step>
+</Steps>
+
+<Tip>
+  If you're an agency or consultant managing multiple clients, create a separate workspace per client. Each workspace has isolated projects, members, billing, and settings.
+</Tip>
+
+## Managing Projects
+
+Projects live on your workspace dashboard. From there you can create, rename, archive, and delete projects without leaving the view.
+
+<Tabs>
+  <Tab title="Create">
+    Click **New project** on your workspace dashboard, then describe what you want to build. Lovable starts the project and drops you straight into the editor.
+  </Tab>
+  <Tab title="Rename">
+    Open the project's three-dot menu on the dashboard and select **Rename**. The new name appears everywhere — in your dashboard, the URL slug, and GitHub if you've synced.
+  </Tab>
+  <Tab title="Archive">
+    Archive projects you're not actively working on. Archived projects don't count against any limits but remain accessible if you need them later. Select **Archive** from the project menu.
+  </Tab>
+  <Tab title="Delete">
+    Deleting a project is permanent and removes the deployment. Select **Delete** from the project menu. If you've synced to GitHub, the repository is not deleted — your code stays safe.
+  </Tab>
+</Tabs>
+
+## Credit Management
+
+Credits are the currency Lovable uses to measure usage — building, hosting, and AI features all draw from a shared workspace credit balance.
+
+- **Shared pool**: every member of the workspace builds from the same credit balance.
+- **Monthly credit limits**: workspace owners and admins can set a default monthly credit limit for all members, plus per-member overrides, so no one person can exhaust the team's budget.
+- **Top-ups**: purchase additional credits at any time from **Workspace Settings → Billing**.
+- **Credit visibility**: admins can see credit usage broken down by member and project.
+
+<Note>
+  Plans are priced by the credits they include, not by the number of seats. Inviting more team members does not change your subscription cost — only total credit usage does.
+</Note>
+
+To set per-member credit limits:
+
+<Steps>
+  <Step title="Go to Workspace Settings → Members">
+    Find the member whose limit you want to adjust.
+  </Step>
+  <Step title="Edit the credit limit">
+    Click the edit icon next to their monthly credit allocation and enter the limit in credits. Leave it blank to apply the workspace default.
+  </Step>
+  <Step title="Set a workspace default">
+    In **Workspace Settings → Billing**, set a default monthly credit limit applied automatically to new members.
+  </Step>
+</Steps>
+
+## Workspace Settings
+
+Access **Workspace Settings** from the sidebar or the workspace menu to configure:
+
+| Setting | Description |
+|---|---|
+| **Name & logo** | Display name and logo shown to all members |
+| **Notifications** | Configure email and in-app notification preferences |
+| **Billing** | Manage your subscription plan, payment method, credit top-ups, and invoices |
+| **Members** | Invite members, assign roles, and set credit limits |
+| **Security** | Configure SSO, SCIM, and security scan policies |
+| **Connectors** | Connect shared integrations (Supabase, Stripe, Slack, etc.) available across all projects |
+
+## Design Systems
+
+Design Systems let you define workspace-level brand standards — colors, typography, component styles — that apply to all new projects your team creates.
+
+When you configure a Design System for your workspace, Lovable applies your brand palette, font choices, and component defaults whenever a new project is started. This keeps every app your team ships visually consistent without requiring each builder to configure styles from scratch.
+
+To set up your workspace Design System:
+
+<Steps>
+  <Step title="Open Workspace Settings → Design System">
+    Navigate to the Design System tab in your workspace settings.
+  </Step>
+  <Step title="Define your brand tokens">
+    Set your primary and secondary colors, font families, border radius preferences, and any other global tokens.
+  </Step>
+  <Step title="Save and apply">
+    Save your design system. All new projects will inherit these defaults automatically.
+  </Step>
+</Steps>
+
+<Tip>
+  You can override workspace design system settings at the project level without affecting other projects. Use the project-level Design mode for one-off customizations.
+</Tip>
+
+## Project Knowledge
+
+Project Knowledge lets you set workspace-wide context — your brand voice, API patterns, coding standards, naming conventions — so Lovable automatically follows them on every build, in every project.
+
+Unlike design systems, which govern visual output, Knowledge governs how Lovable reasons about your organization: what your product does, which libraries you prefer, how you structure data, and what conventions to follow.
+
+Set workspace Knowledge in **Workspace Settings → Knowledge**, then optionally add project-specific context at the project level to layer more detail on top.
+
+## Plans and Multiple Workspaces
+
+Every Lovable subscription is tied to a single workspace. Enterprise customers who need to manage separate billing, governance, or membership for different business units can purchase multiple Enterprise workspaces.
+
+<CardGroup cols={2}>
+  <Card title="Collaboration" icon="users" href="/workspace/collaboration">
+    Invite members, assign roles, and manage permissions across your team.
+  </Card>
+  <Card title="SSO & SCIM" icon="shield-check" href="/workspace/sso-scim">
+    Set up single sign-on and automated user provisioning for Enterprise teams.
+  </Card>
+  <Card title="Security" icon="lock" href="/workspace/security">
+    Configure security scans, access controls, compliance certifications, and audit logs.
+  </Card>
+  <Card title="Plans & Credits" icon="credit-card" href="/introduction/plans-and-credits">
+    Understand how credits work, what each plan includes, and how to top up.
+  </Card>
+</CardGroup>

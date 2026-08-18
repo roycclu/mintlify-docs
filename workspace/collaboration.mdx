@@ -1,0 +1,159 @@
+---
+title: "Collaborate with Your Team in Lovable"
+sidebarTitle: "Collaboration"
+description: "Invite unlimited team members, assign roles, manage credit limits, and collaborate on projects with comments, GitHub sync, and shared workspace knowledge."
+---
+
+Lovable is built for teams. You can invite as many people as you need — product managers, designers, engineers, stakeholders — and everyone works from the same shared workspace. Members can build projects, leave feedback on UI, and review changes in GitHub without stepping on each other's work. No per-seat pricing, no complicated license management: you pay for the credits your team uses, and every invited member draws from the same pool.
+
+## Inviting Team Members
+
+Anyone you invite to your workspace can immediately start building. There's no per-seat cost — plans are priced by the credits they include, not by the number of members.
+
+<Steps>
+  <Step title="Open Workspace Settings → Members">
+    Click your workspace name in the top-left, then go to **Workspace Settings** and select the **Members** tab.
+  </Step>
+  <Step title="Click Invite">
+    Enter the email address of the person you want to invite and select a role. You can invite multiple people at once by entering additional addresses.
+  </Step>
+  <Step title="Send the invitation">
+    The invitee receives an email with a link to join your workspace. Once they accept, they appear in your Members list and can access all projects in the workspace.
+  </Step>
+</Steps>
+
+<Note>
+  Inviting more people does not change your subscription cost. Plans are priced by credits, not seats. What changes is how quickly the group uses the workspace's shared credit balance.
+</Note>
+
+## Roles and Permissions
+
+Lovable uses four roles to control what members can do inside a workspace. Roles are enforced server-side — they cannot be bypassed through the client.
+
+<Accordion title="Owner">
+  The workspace creator holds the Owner role by default. Owners have full administrative access, including:
+
+  - All Admin capabilities
+  - Manage billing, subscription, and payment methods
+  - Delete the workspace
+  - Transfer ownership to another member
+
+  Each workspace has exactly one Owner, though ownership can be transferred.
+</Accordion>
+
+<Accordion title="Admin">
+  Admins manage day-to-day workspace operations without access to billing:
+
+  - Invite, remove, and change roles for members
+  - Configure workspace-level connectors and integrations
+  - Set workspace design systems and knowledge
+  - Configure security policies (SSO, SCIM, scan settings)
+  - Set default and per-member monthly credit limits
+</Accordion>
+
+<Accordion title="Editor">
+  Editors are the builders. They can:
+
+  - Create, edit, and publish projects
+  - Use all building modes (Agent, Plan, Code)
+  - Apply visual edits to UI
+  - Leave and resolve project comments
+  - Sync projects to GitHub
+</Accordion>
+
+<Accordion title="Viewer">
+  Viewers have read-only access. They can:
+
+  - View all projects in the workspace
+  - Preview live and draft deployments
+  - Read project comments (but cannot leave them)
+
+  Viewers do not consume build credits.
+</Accordion>
+
+<Info>
+  Enterprise plan workspaces unlock additional granular permissions: editing, approving, and publishing are separate roles, and admins can require approval before changes go live.
+</Info>
+
+## Project Comments
+
+Leave feedback directly on UI elements in the live project preview without switching to a separate tool.
+
+To leave a comment:
+
+1. Open the project preview and enter **Comment mode** from the toolbar.
+2. Click on any element in the interface.
+3. Type your comment. Teammates are notified and can reply inline.
+4. Mark the comment as resolved once the feedback is addressed.
+
+Project comments are ideal for design reviews, stakeholder feedback rounds, and QA — keeping all context attached to the specific element it refers to.
+
+## Cross-Project Referencing
+
+Reference components, design patterns, and knowledge from other projects in your workspace. When building a new project, you can point Lovable to an existing project and ask it to follow the same patterns, reuse a particular component, or match a design style — without duplicating code.
+
+Cross-project referencing is especially useful when:
+
+- You want a new internal tool to match the visual style of an existing app
+- You're extracting a feature from one project and rebuilding it in another
+- You want to share a data model or API pattern across multiple projects
+
+Workspace-level Knowledge (set in **Workspace Settings → Knowledge**) is always available across all projects automatically.
+
+## Credit Limits Per Member
+
+To prevent any single member from exhausting the team's shared credit balance, admins can set monthly credit limits.
+
+<Steps>
+  <Step title="Set a workspace default">
+    Go to **Workspace Settings → Billing** and set a default monthly credit limit. This applies automatically to all new members unless overridden.
+  </Step>
+  <Step title="Override a specific member">
+    In **Workspace Settings → Members**, click the edit icon next to a member's allocation. Enter a custom monthly limit — higher or lower than the workspace default.
+  </Step>
+  <Step title="Monitor usage">
+    Track per-member and per-project credit usage from the Billing tab. Usage updates in real time as members build.
+  </Step>
+</Steps>
+
+<Tip>
+  For agencies and client work, create a separate workspace for each client to keep their projects, billing, and members completely isolated. Each workspace has its own credit balance and member list.
+</Tip>
+
+## GitHub Collaboration
+
+Every Lovable project can sync to a GitHub repository, giving engineers the ability to review, extend, and contribute using standard developer workflows — pull requests, code review, branch protection — without ever opening Lovable.
+
+The collaboration flow works like this:
+
+1. An owner or admin connects the workspace to GitHub under **Workspace Settings → Integrations → GitHub**.
+2. When a project is synced, Lovable pushes every change to the connected repository automatically.
+3. Engineers clone the repository, work in their preferred editor, and submit pull requests as normal.
+4. Lovable users see merged changes reflected when they next build in the editor.
+
+Because the codebase is standard React + Tailwind + Supabase, any developer familiar with those technologies can contribute immediately — no Lovable-specific knowledge required.
+
+## Enterprise: Approval Workflows and Publishing Controls
+
+On Enterprise plans, the editing, approving, and publishing steps are separated into distinct roles. This enables a review process before any change reaches your live environment:
+
+- **Editors** make changes to projects.
+- **Approvers** review changes and mark them as approved.
+- **Publishers** trigger the deployment once approval is granted.
+
+Workspace admins can configure whether publishing requires explicit approval, and all publish events are logged with full user attribution in the audit log.
+
+<CardGroup cols={2}>
+  <Card title="Workspace Overview" icon="house" href="/workspace/overview">
+    Understand workspace structure, project management, and credit sharing.
+  </Card>
+  <Card title="SSO & SCIM" icon="shield-check" href="/workspace/sso-scim">
+    Set up centralized identity management and automated user provisioning.
+  </Card>
+  <Card title="Security" icon="lock" href="/workspace/security">
+    Review security scanning, compliance certifications, and access controls.
+  </Card>
+  <Card title="GitHub Integration" icon="github" href="/integrations/github">
+    Sync your projects to GitHub and collaborate with your engineering team.
+  </Card>
+</CardGroup>

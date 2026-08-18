@@ -1,0 +1,151 @@
+---
+title: "Lovable Plans and Credits Explained"
+sidebarTitle: "Plans & Credits"
+description: "Learn how Lovable's credit system works, what each plan includes, how credits expire, and how to choose the right plan for your team."
+---
+
+Lovable uses a credit-based system to measure usage across every part of the platform — building, hosting, and AI-powered features inside your apps. Credits give you a single, flexible balance that works across all of these, so you're not managing separate quotas for different capabilities. This page explains how credits work, what each plan includes, and how to get the most from your subscription.
+
+## What are credits?
+
+Credits are the units Lovable uses to measure and pay for usage across your workspace. A single credit balance covers three types of activity:
+
+- **Building** — sending messages to Lovable to generate or modify your app
+- **Hosting (Cloud)** — running your published app on Lovable Cloud
+- **AI features in apps** — powering AI-driven functionality you build into your own apps for end users
+
+The value of a credit and the rate at which credits are consumed depend on your subscription plan and the specific feature being used.
+
+<Note>
+  Credits are not refundable and cannot be redeemed for cash or any other value. They are also not transferable between separate workspaces.
+</Note>
+
+## How credits are consumed for building
+
+The number of credits a message costs depends on the complexity of what you're asking Lovable to do. Simpler changes cost fewer credits; larger, multi-step tasks cost more.
+
+**Pricing by mode:**
+- **Default (Agent) Mode** — credits vary based on task complexity
+- **Plan Mode** — a flat 1 credit per message
+
+Here are real examples of prompts and their approximate credit costs:
+
+| Prompt | Work done | Credits |
+|---|---|---|
+| "Make the button gray" | Updates button styles | 0.50 |
+| "Remove the footer" | Removes the footer component | 0.90 |
+| "Add authentication with sign up and login" | Adds auth pages, logic, and updates routes | 1.20 |
+| "Build me a landing page, use images" | Creates a landing page with 3 generated images, theme, and 5 sections | 1.70 |
+
+You can see exactly how many credits each message cost by hovering over the three dots next to any message in your chat history.
+
+## Plan overview
+
+Lovable offers four plans. All plans support unlimited workspace members — you are never charged per seat.
+
+<CardGroup cols={2}>
+  <Card title="Free" icon="seedling" href="/introduction/plans-and-credits">
+    **No credit card required**
+
+    - 5 build credits per day (up to 30/month) as a daily grant
+    - 20 Cloud credits per month
+    - 4 AI feature credits to try in-app AI before subscribing
+    - Unlimited projects
+    - GitHub sync
+  </Card>
+  <Card title="Pro" icon="star" href="/introduction/plans-and-credits">
+    **For individuals and small teams**
+
+    - Monthly credit balance added to your account each cycle
+    - Plus daily grants of 5 build credits + 20 Cloud credits/month
+    - All Free features
+    - Custom domains
+    - Priority support
+  </Card>
+  <Card title="Business" icon="building" href="/workspace/overview">
+    **For teams that need governance**
+
+    - Everything in Pro
+    - SSO / SAML single sign-on
+    - SCIM user provisioning
+    - Audit logs
+    - Per-member credit limits
+    - Workspace-level design templates
+    - Data training opt-out
+  </Card>
+  <Card title="Enterprise" icon="shield-check" href="/workspace/security">
+    **For large organizations**
+
+    - Everything in Business
+    - Volume-based credit pricing
+    - Dedicated support and SLA
+    - SOC 2 Type II and ISO 27001 compliance
+    - Security scanning (Aikido)
+    - Custom contracts and invoicing
+  </Card>
+</CardGroup>
+
+<Note>
+  The cost per credit for running hosted apps and in-app AI features is the same on Pro and Business plans. Because Business plan credits are priced at a higher rate per credit overall, users who switch from Pro to Business will see their Cloud and AI feature costs (in credits) appear lower in their usage dashboard.
+</Note>
+
+## Credit grants vs. credit balance
+
+Paid plans give you credits in two ways:
+
+- **Monthly credit balance** — added to your account at the start of each billing period, this balance is flexible and can be used for building, hosting, or in-app AI features
+- **Daily build grants** — 5 build credits per day included on all plans (including Free), intended for everyday building; these expire at midnight and do not roll over
+- **Monthly Cloud grant** — 20 Cloud credits per month included on all plans, covering typical hosting costs for small and new apps
+
+## Credit expiry rules
+
+| Credit type | Expiry |
+|---|---|
+| Monthly plan credits | 2 months after the month they were issued |
+| Annual plan credits | 1 month after your annual period ends |
+| Top-up credits (purchased separately) | 12 months from the date of purchase |
+| Daily build grants | Expire at end of each day — do not roll over |
+
+If you cancel your plan, you keep your remaining credits until the end of your current billing period. After that, your workspace switches to the Free plan. Any unused paid credits reactivate if you re-subscribe before they expire.
+
+## Sharing credits with a team
+
+Every Lovable plan belongs to a workspace, and every member you invite shares the workspace's credit balance. There are no per-seat charges — inviting more people doesn't change your subscription cost. What changes is how quickly the group uses the shared credits.
+
+To prevent any single member from consuming the pool, workspace owners and admins can set:
+- A **default monthly credit limit** that applies to all members
+- **Per-member overrides** for individuals who need more or less
+
+This works the same way for companies, classrooms, and communities. See [Lovable Workspace](/workspace/overview) for full details on managing your team's credit usage.
+
+## Student discount
+
+Students receive **50% off** the Lovable Pro plan with a valid student email address. The discount is valid for up to 12 months and covers students at accredited universities and colleges worldwide.
+
+To claim your discount, visit [lovable.dev/students](https://lovable.dev/students) and verify your student status while logged in with your university email. Teachers and faculty at academic institutions are also eligible.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What happens when my credits run out?">
+    When your credit balance reaches zero, building and AI features that draw from that balance will pause until credits are replenished. You will still receive your daily build grants (5 credits/day) and monthly Cloud grant (20 credits/month) as long as your subscription is active — these don't come from your balance.
+
+    To continue building immediately, you can purchase top-up credits from your workspace settings, or upgrade to a plan with a larger monthly credit balance. Top-up credits last 12 months from purchase.
+  </Accordion>
+
+  <Accordion title="Can I share credits with my team?">
+    Yes. All credits belong to your workspace, not to individual accounts. Every member you invite into your workspace draws from the same shared balance. You can control usage by setting a default per-member monthly credit limit in workspace settings, with the option to override limits for specific members. There is no extra charge for adding team members — all plans support unlimited members.
+  </Accordion>
+
+  <Accordion title="How do I buy more credits?">
+    You can purchase top-up credits at any time from your **Workspace Settings → Billing** page. Top-up credits are added to your balance immediately and remain valid for 12 months from the date of purchase. For large volume needs, the Enterprise plan offers volume-based credit pricing — contact the Lovable sales team to discuss options.
+  </Accordion>
+
+  <Accordion title="How much does it cost to host my app?">
+    For most users with new or small apps, hosting costs nothing beyond the included 20 Cloud credits per month. Apps that reach significant traffic volumes may start consuming credits from your balance on top of the included grant. You can monitor your Cloud usage in your workspace dashboard.
+  </Accordion>
+
+  <Accordion title="Is there a nonprofit discount?">
+    Yes. Lovable offers a 20% discount to verified nonprofit organizations for one year, renewable annually. To apply, email [support@lovable.dev](mailto:support@lovable.dev) with documentation of your organization's nonprofit status (such as a 501(c)(3) certificate for US organizations, or equivalent for international nonprofits).
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,129 @@
+---
+title: "Get Started with Lovable: Build Your First App"
+sidebarTitle: "Quick Start"
+description: "Build and publish your first full-stack web app in minutes — no coding experience needed. Just a browser, an idea, and a free Lovable account."
+---
+
+The fastest way to understand Lovable is to build something. This guide walks you through signing up, describing your idea, watching Lovable generate your app in real time, and publishing it live — all without writing a single line of code. Most first-time builders go from blank canvas to published app in under 10 minutes.
+
+<Tip>
+  The free plan gives you 5 build credits per day (up to 30 per month) — no credit card required. That's enough to build and iterate on your first app today.
+</Tip>
+
+## Prerequisites
+
+All you need is a modern web browser. No coding experience, no local development environment, no installs. If you want to go further after this guide, you can connect a GitHub account and customize your code — but that's entirely optional.
+
+## Build your first app
+
+<Steps>
+  <Step title="Create your free account">
+    Go to [lovable.dev/signup](https://lovable.dev/signup) and sign up with your email address or Google account. No credit card is required to get started.
+
+    After signing in, you land in your **workspace dashboard** — your home for all projects.
+  </Step>
+
+  <Step title="Start a new project">
+    Click **New project** on your dashboard. You'll see a prompt input where you describe what you want to build.
+
+    This is your main interface for communicating with Lovable. Think of it as chatting with a senior developer who can build anything you describe.
+  </Step>
+
+  <Step title="Describe your idea">
+    Type a description of your app in the prompt box and press **Enter** (or click the send button). Lovable reads your description, plans the implementation, and begins generating your app — you can watch it build in real time in the preview pane on the right.
+
+    **How to write a great first prompt:**
+
+    - Be specific about what the app does, who uses it, and what the main actions are
+    - Describe the key screens or pages you want
+    - Mention any integrations you need (e.g., "connect to a database", "add user login")
+    - Include visual preferences if you have them (e.g., "clean minimal design", "dark theme")
+
+    You can also provide context beyond text:
+    - **Upload a screenshot** of an app you like for visual reference
+    - **Paste a Notion doc** or plain-text spec to give Lovable your full requirements
+    - **Drop in a wireframe or mockup** image to guide the layout
+
+    **Example prompts to try:**
+
+    ```text
+    Build me a landing page for a project management SaaS tool.
+    Include a hero section, a features grid, pricing table with three tiers,
+    and a waitlist signup form that saves emails to a database.
+    Use a clean, modern design with a dark navy and white color scheme.
+    ```
+
+    ```text
+    Create a personal finance tracker app. Users should be able to log
+    income and expenses, categorize transactions, and see a monthly
+    summary dashboard with charts. Include user authentication so
+    each person sees only their own data.
+    ```
+
+    ```text
+    Build a simple internal tool for a restaurant. Staff can add daily
+    specials, mark items as sold out, and see a live menu board view.
+    No login needed — it's just for internal use.
+    ```
+  </Step>
+
+  <Step title="Review and refine">
+    Once Lovable finishes the first build, you'll see a live preview of your app. Now comes the fun part — iteration.
+
+    Click anywhere in the preview to inspect elements, or type follow-up messages in the chat to request changes:
+
+    - `"Make the header sticky and add a shadow when scrolling"`
+    - `"Change the primary color to teal"`
+    - `"Add a loading spinner to the submit button"`
+    - `"The pricing table should have a 'Most Popular' badge on the Pro tier"`
+
+    Each message refines your app. You can also switch to **visual editing** mode to drag, resize, and restyle elements directly without prompting — great for fine-tuning layouts and typography.
+
+    <Tip>
+      Start simple and iterate. A focused first prompt ("build a waitlist page") gets you something solid to react to faster than a long, detailed spec. You can always add complexity in follow-up messages.
+    </Tip>
+  </Step>
+
+  <Step title="Connect a database (optional)">
+    If your app needs to store data — user accounts, form submissions, content — Lovable can connect to a **Supabase** database with a single click.
+
+    In the project settings panel, click **Connect Supabase** and follow the prompts. Lovable will automatically set up the database tables, authentication flows, and row-level security rules your app needs. You don't need to configure anything manually.
+
+    See [Integrate with Supabase](/integrations/supabase) for the full guide.
+  </Step>
+
+  <Step title="Publish your app">
+    When you're happy with your app, click **Publish** in the top-right corner of the editor. Lovable deploys your app to Lovable Cloud (powered by Cloudflare Workers) and gives you a live URL within seconds.
+
+    Your app is now live and accessible to anyone with the link. From here you can:
+    - [Set up a custom domain](/publishing/custom-domain) (e.g., `myapp.com`)
+    - [Configure Test and Live environments](/publishing/environments) for safe iteration
+    - [Sync to GitHub](/integrations/github) so you own your code repository
+  </Step>
+</Steps>
+
+## Tips for your first app
+
+**Keep the first version narrow.** A focused app that does one thing well is easier to build and iterate on than a sprawling feature set. You can always add more — Lovable is designed for continuous iteration.
+
+**React to what Lovable builds.** You'll often find it easier to describe changes to what exists ("make the sidebar narrower", "replace the table with cards") than to specify everything upfront. Use the preview as your canvas.
+
+**Use screenshots for visual guidance.** If you want your app to look like a specific design you've seen, screenshot it and attach it to your prompt. Lovable will use it as a reference.
+
+**Don't worry about perfection in the first pass.** Your first publish is a starting point. Lovable projects are never "done" — you keep chatting, refining, and improving.
+
+## Explore building modes
+
+Once you've built your first app, explore the different ways to work with Lovable:
+
+<CardGroup cols={3}>
+  <Card title="Agent Mode" icon="robot" href="/building/agent-mode">
+    Let Lovable work autonomously on complex, multi-step features while you watch.
+  </Card>
+  <Card title="Plan Mode" icon="list-check" href="/building/plan-mode">
+    Brainstorm and map out your app's architecture before making any changes.
+  </Card>
+  <Card title="Code Mode" icon="code" href="/building/code-mode">
+    View and directly edit the generated React and TypeScript code.
+  </Card>
+</CardGroup>

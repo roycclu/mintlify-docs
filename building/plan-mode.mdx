@@ -1,0 +1,70 @@
+---
+title: "Brainstorm and Plan Your App with Lovable Plan Mode"
+sidebarTitle: "Plan Mode"
+description: "Plan Mode lets you brainstorm features, explore architecture, and align on what to build with Lovable — without writing code or spending build credits."
+---
+
+Plan Mode is a dedicated brainstorming space inside Lovable where you can think through your app with the AI before a single line of code is written. Unlike Agent Mode, Plan Mode never modifies your project files — instead, it helps you define what you want to build, explore different approaches, and agree on a direction. This makes it especially valuable before complex features where jumping straight into building risks wasted effort.
+
+## How to enter Plan Mode
+
+Toggle Plan Mode using the mode selector in the chat interface, just below the message input. The toggle switches between **Default** (Agent Mode) and **Plan** — select **Plan** before sending your message. The chat interface indicates which mode is active so you always know whether Lovable will write code or respond conversationally.
+
+## What to use Plan Mode for
+
+Plan Mode shines in situations where you need to think before you build:
+
+<CardGroup cols={2}>
+  <Card title="Explore architecture options" icon="sitemap">
+    Ask Lovable to compare different approaches to your data model, routing structure, or integration design before committing to one.
+  </Card>
+  <Card title="Define features before building" icon="list-check">
+    Sketch out a full feature set — pages, user flows, edge cases — so you know exactly what you're asking Agent Mode to build.
+  </Card>
+  <Card title="Validate scope" icon="magnifying-glass">
+    Pressure-test a feature idea with Lovable to surface complexity or dependencies before spending build credits.
+  </Card>
+  <Card title="Align with stakeholders" icon="users">
+    Use the plan as a shared reference you can share with your team, product manager, or client before any work begins.
+  </Card>
+</CardGroup>
+
+## Example: planning a SaaS dashboard
+
+Suppose you're starting a new project and want to build an analytics dashboard for a B2B SaaS product. Instead of jumping straight into building, you open Plan Mode and ask:
+
+> "I want to build an analytics dashboard for a B2B SaaS app. The app tracks user activity, subscription status, and feature usage. Outline the pages I'll need, the main data model, and the key user flows."
+
+Lovable responds with a structured plan — proposed pages (Overview, Users, Feature Usage, Settings), a suggested Supabase schema (users, events, subscriptions tables), and the primary user flows (admin login, viewing cohort data, exporting reports). You can ask follow-up questions to refine any section without any code being generated.
+
+Once the plan reflects what you want to build, you switch back to Agent Mode and use the agreed plan as the basis for your first build message.
+
+## Moving from Plan Mode to building
+
+When you're happy with the plan:
+
+<Steps>
+  <Step title="Switch back to Agent Mode">
+    Toggle the mode selector back to **Default** in the chat interface.
+  </Step>
+  <Step title="Reference the plan in your first build message">
+    Start your Agent Mode message with a summary of what was agreed — for example, "Build the dashboard we just planned: start with the Overview page and the Supabase schema for users and events."
+  </Step>
+  <Step title="Iterate from the plan">
+    As Lovable builds, use follow-up messages to implement the remaining pages and flows from your plan, one focused step at a time.
+  </Step>
+</Steps>
+
+<Tip>
+  Use Plan Mode before any task that feels complex or ambiguous. A five-minute planning conversation can prevent several rounds of back-and-forth in Agent Mode. Teams at companies like n8n and Delivery Hero use structured planning sessions to ensure the final prototype matches the original intent — without surprises.
+</Tip>
+
+## Credit cost in Plan Mode
+
+Plan Mode charges a flat **1 credit per message**, regardless of the complexity of your question or the length of Lovable's response. This is lower and more predictable than Agent Mode, which charges based on what is built.
+
+Use Plan Mode freely to explore ideas — the cost of planning is always predictable, and it often reduces the number of Agent Mode iterations needed to get to a result you're happy with.
+
+<Note>
+  Plan Mode conversations are part of your project's chat history. You can scroll back to review any plan at any time, or reference earlier messages when switching back to Agent Mode.
+</Note>

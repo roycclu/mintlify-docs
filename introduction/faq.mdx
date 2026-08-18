@@ -1,0 +1,132 @@
+---
+title: "Frequently Asked Questions About Lovable"
+sidebarTitle: "FAQ"
+description: "Answers to the most common questions about what Lovable is, how it works, who owns your code, what you can build, and how to get help."
+---
+
+This page collects the questions most commonly asked by new Lovable users. If you don't find what you're looking for here, join the [Lovable Discord community](https://discord.com/invite/lovable-dev) or reach out to the support team directly.
+
+<AccordionGroup>
+  <Accordion title="What is Lovable and how does it work?">
+    Lovable is an AI-powered platform that turns plain-language descriptions into production-ready full-stack web applications. You describe what you want to build in a chat interface — the app's purpose, its screens, the actions users can take — and Lovable's AI generates working React code, wires up a database, sets up authentication, and deploys everything in real time.
+
+    The core loop is: describe → watch it build → refine with follow-up messages → publish. You can iterate as many times as you like. There is no separate "export" step — your app is live and editable continuously.
+
+    Lovable uses a credit-based system to measure usage. The free plan gives you 5 build credits per day to get started at no cost. See [Plans & Credits](/introduction/plans-and-credits) for full details.
+  </Accordion>
+
+  <Accordion title="Do I need to know how to code?">
+    No. Lovable is designed specifically so that anyone — regardless of technical background — can build and ship real web apps. You describe what you want in plain language, and Lovable writes the code.
+
+    That said, if you do know how to code, Lovable gives you full access to the generated source code through **Code Mode**. You can read, edit, and extend the code directly, and sync the entire project to a GitHub repository you own. Developers often use Lovable to accelerate the early stages of a project and then take over in code for custom or complex requirements.
+  </Accordion>
+
+  <Accordion title="What technology stack does Lovable use?">
+    Every app built with Lovable runs on a modern, industry-standard stack:
+
+    | Layer | Technology |
+    |---|---|
+    | Frontend | React + Tailwind CSS |
+    | Backend & database | Supabase (PostgreSQL + Auth + File Storage) |
+    | Hosting | Lovable Cloud on Cloudflare Workers |
+    | Version control | GitHub |
+    | Runtime (new apps) | TanStack Start |
+
+    This is the same stack used by professional engineering teams at scale. Because Lovable generates standard React and TypeScript code (not a proprietary format), any developer can read, modify, and extend what Lovable builds — using any standard tooling.
+  </Accordion>
+
+  <Accordion title="Who owns the code and projects I build?">
+    You do. Your code, your projects, and any customer data stored in your app belong to you. This includes all AI-generated output, subject to any third-party rights in the underlying AI models.
+
+    Lovable syncs your project to a GitHub repository from day one — you own that repository. You can take your code and deploy it anywhere, with any hosting provider, at any time.
+  </Accordion>
+
+  <Accordion title="Can I export my code?">
+    Yes. Your code is always available through GitHub sync. From your project settings, you can connect a GitHub repository and Lovable will push every change automatically. You can then clone the repository locally, open it in any code editor, and work with it just like any other React project.
+
+    There is no lock-in. Your app is a standard React + TypeScript project and can be deployed to Vercel, Netlify, AWS, or any other hosting platform.
+  </Accordion>
+
+  <Accordion title="Will I outgrow Lovable?">
+    Lovable is built for production, not just prototyping. The apps Lovable generates run on real infrastructure: a Postgres database (via Supabase), row-level security, proper authentication with JWT tokens, file storage, and edge-hosted React on Cloudflare Workers.
+
+    Real companies run their businesses on Lovable-built apps. eXp Realty cancelled $2M+ in annual SaaS contracts after replacing them with Lovable-built internal tools. The Scion Group deployed 100+ apps in under four months. Nursa built a brand-new product in 48 hours.
+
+    If your app's complexity eventually requires custom infrastructure or specialized backend logic, you can export your code to GitHub and continue development in a standard engineering environment — building on top of everything Lovable already created.
+  </Accordion>
+
+  <Accordion title="What tools does Lovable connect to?">
+    Lovable supports 80+ integrations across popular SaaS tools and developer services. Featured connectors include:
+
+    - **Google Workspace** — Gmail, Calendar, Drive, Docs, Sheets, Slides
+    - **Payments** — Stripe (with support for 200+ countries and currencies)
+    - **Database & backend** — Supabase, AWS S3, BigQuery, Snowflake, Databricks
+    - **Productivity** — Notion, Slack, Linear, HubSpot, Asana
+    - **Developer tools** — GitHub, GitLab
+    - **Communication** — Twilio, Resend, Telegram
+    - **AI services** — ElevenLabs, Perplexity, Firecrawl
+    - **E-commerce** — Shopify
+
+    See [Integrations Overview](/integrations/overview) for the full catalog and setup guides.
+  </Accordion>
+
+  <Accordion title="Can I use Lovable for client work?">
+    Yes. Many freelancers and agencies use Lovable to build apps and websites for clients. There are no restrictions on commercial use. You own the code and projects you build, and you can transfer project ownership or invite clients into a workspace as collaborators.
+
+    For agencies managing multiple clients, the workspace model works well: each client can have their own workspace, or you can manage multiple projects within a shared workspace.
+  </Accordion>
+
+  <Accordion title="How do I get help if I get stuck?">
+    There are several ways to get support:
+
+    - **These docs** — search for your topic or browse the navigation to find guides and references
+    - **Discord community** — join [discord.com/invite/lovable-dev](https://discord.com/invite/lovable-dev) to ask questions, share your builds, and learn from thousands of other Lovable users
+    - **Support email** — paid plan subscribers can email [support@lovable.dev](mailto:support@lovable.dev) for direct help from the Lovable team
+    - **Lovable Experts** — if you want hands-on help building your app, [lovable.dev/experts](https://lovable.dev/experts) connects you with vetted Lovable specialists
+
+    See the [Support Policy](/troubleshooting/support) page for response time expectations by plan.
+  </Accordion>
+
+  <Accordion title="What is Lovable Cloud?">
+    Lovable Cloud is the built-in hosting platform that deploys your app with a single click. It is powered by Cloudflare Workers, which means your app runs at the network edge for fast global performance.
+
+    When you publish on Lovable Cloud you get:
+    - A live URL (`your-project.lovable.app`) immediately after publishing
+    - Automatic SSL/HTTPS
+    - Support for custom domains
+    - Test and Live environments for safe iteration
+    - Hosting costs covered by your plan's included Cloud credits for typical usage
+
+    You are never required to use Lovable Cloud — you can also export your code and deploy to any external hosting provider. See [Lovable Cloud](/publishing/lovable-cloud) for the full guide.
+  </Accordion>
+
+  <Accordion title="Can I accept payments in my app?">
+    Yes. Lovable has a built-in Stripe integration that lets you add payment processing to any app. Stripe handles local payment methods, currency conversion, and tax compliance in 200+ countries and territories.
+
+    Once you connect Stripe in your project settings, you can prompt Lovable to add subscription billing, one-time payments, paywalled content, or checkout flows — and Lovable will wire everything up for you. See [Payments with Stripe](/integrations/stripe-payments) for the setup guide.
+  </Accordion>
+
+  <Accordion title="Is there a free plan?">
+    Yes. The free plan gives you:
+
+    - **5 build credits per day** (up to 30 per month) as a daily grant
+    - **20 Cloud credits per month** for hosting
+    - **4 AI feature credits** to try in-app AI before subscribing
+    - Unlimited projects and GitHub sync
+
+    No credit card is required. The free plan is a genuine way to build and iterate on real projects — many users launch their first app entirely on free credits.
+
+    Students can get **50% off** the Pro plan with a valid university email. See [lovable.dev/students](https://lovable.dev/students) to claim the discount.
+  </Accordion>
+
+  <Accordion title="Does Lovable support teams?">
+    Yes. All Lovable plans support **unlimited workspace members** — there are no per-seat charges. When you invite someone to your workspace, they build from the shared credit balance.
+
+    Teams get additional features on the Business and Enterprise plans:
+
+    - **Business** — SSO/SAML, SCIM provisioning, audit logs, per-member credit limits, and workspace-level design templates
+    - **Enterprise** — everything in Business plus volume pricing, dedicated support, SOC 2 Type II and ISO 27001 compliance, and custom contracts
+
+    See [Workspace & Team](/workspace/overview) and [SSO & SCIM](/workspace/sso-scim) for setup guides.
+  </Accordion>
+</AccordionGroup>

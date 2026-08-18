@@ -1,0 +1,106 @@
+---
+title: "Build Apps Autonomously with Lovable Agent Mode"
+sidebarTitle: "Agent Mode"
+description: "Agent Mode is Lovable's default building mode — describe what you want and the AI plans, codes, and previews your app autonomously in real time."
+---
+
+Agent Mode is the default way to build in Lovable. You describe what you want in plain language, and Lovable reads your project's current code, plans the necessary changes, writes the implementation, and refreshes the live preview — all without you touching a single file. It handles everything from scaffolding new React components and wiring up client-side routing to defining Supabase database schemas and adding end-to-end authentication flows.
+
+## How Agent Mode works
+
+When you send a message in Agent Mode, Lovable follows a consistent process before a single line of code changes:
+
+<Steps>
+  <Step title="Read the current state">
+    Lovable reads your project's existing files so every change fits the code that already exists. It never generates changes in isolation.
+  </Step>
+  <Step title="Plan the work">
+    Lovable breaks your request into discrete steps — which components to create, which routes to add, which database tables to define — and shows you a brief plan before proceeding.
+  </Step>
+  <Step title="Write the code">
+    Lovable implements each planned step: creating or editing React components, updating Tailwind styles, configuring Supabase tables, and adding any necessary integration logic.
+  </Step>
+  <Step title="Preview the result">
+    The live preview refreshes automatically so you can see the outcome immediately. If something needs tweaking, just describe it in the next message.
+  </Step>
+</Steps>
+
+## What Agent Mode handles automatically
+
+Agent Mode takes care of the wiring that usually slows down development:
+
+<CardGroup cols={2}>
+  <Card title="React components" icon="puzzle-piece">
+    Creates and structures reusable components with correct props, state management, and Tailwind styling.
+  </Card>
+  <Card title="Client-side routing" icon="route">
+    Adds pages and configures routing so navigation between views just works.
+  </Card>
+  <Card title="Database schemas" icon="database">
+    Defines Supabase Postgres tables, sets up row-level security policies, and generates the client query code.
+  </Card>
+  <Card title="Authentication flows" icon="lock">
+    Wires up sign-up, login, password reset, and session handling using Supabase Auth.
+  </Card>
+</CardGroup>
+
+## Example: adding a user profile page
+
+Here is what happens when you send the prompt **"Add a user profile page with avatar upload"**:
+
+<Steps>
+  <Step title="Lovable plans the feature">
+    It identifies that a new `/profile` route is needed, an avatar storage bucket must be created in Supabase, and the existing navigation should link to the new page.
+  </Step>
+  <Step title="It creates the route and component">
+    A `ProfilePage.tsx` component is created under `src/pages/` and added to the router. The component fetches the current user's profile data from Supabase on mount.
+  </Step>
+  <Step title="It adds the avatar upload logic">
+    An `AvatarUpload` component is built with a file input, client-side image preview, and an upload handler that stores the file in a Supabase storage bucket and updates the user's profile record.
+  </Step>
+  <Step title="It wires up the navigation">
+    A link to `/profile` is added to the app's existing navigation so users can reach the page.
+  </Step>
+  <Step title="Preview refreshes">
+    The live preview reloads with the fully working profile page, ready for you to review.
+  </Step>
+</Steps>
+
+## Writing prompts that get great results
+
+The quality of your output correlates directly with the specificity of your prompt. A few patterns that work well:
+
+- **Describe what the user sees and does** — not the implementation. "Show a list of tasks grouped by status, with a button to add a new task at the top" is more useful than "create a task management component."
+- **Reference existing elements by name** — "the sidebar nav" or "the blue Submit button in the onboarding form" anchors Lovable to the right part of your code.
+- **State the end result** — describe the finished experience, and let Lovable figure out the steps.
+- **One feature at a time** — each message is easier to validate when it covers a focused change. Chain messages to build larger features incrementally.
+
+## Iterating on the output
+
+Agent Mode is designed for iteration. After Lovable builds something:
+
+- Send a follow-up message to refine any part of the result — "make the avatar upload button secondary style" or "add form validation to the display name field."
+- Revert to any previous version using the message history if you want to roll back a change.
+- Switch to [Visual Editing](/building/visual-editing) to make quick design tweaks without writing a prompt.
+
+<Tip>
+  If Agent Mode builds something that isn't quite right, just describe what needs changing in your next message. Lovable reads the current code state before making any edits, so follow-up corrections are applied accurately to what was already built.
+</Tip>
+
+## Choosing between Agent Mode, Plan Mode, and Code Mode
+
+<Tabs>
+  <Tab title="Agent Mode (default)">
+    Use Agent Mode when you're ready to build. It writes code, creates files, and updates your live preview. Best for most development tasks — from adding a single component to scaffolding an entire feature.
+  </Tab>
+  <Tab title="Plan Mode">
+    Use [Plan Mode](/building/plan-mode) before a complex build to think through architecture, features, and user flows with Lovable without spending build credits. Switch back to Agent Mode when the plan is agreed.
+  </Tab>
+  <Tab title="Code Mode">
+    Use [Code Mode](/building/code-mode) when you need to read or edit source files directly — fine-tuning logic, debugging a specific function, or reviewing a Supabase schema. Code Mode doesn't rebuild the preview automatically.
+  </Tab>
+</Tabs>
+
+<Note>
+  Credit consumption in Agent Mode (the default mode) varies based on task complexity. Simple style changes cost as little as 0.50 credits; larger features like adding authentication typically cost around 1–2 credits. You can see the exact cost of any message by hovering over it in the chat history. Plan Mode charges a flat 1 credit per message regardless of complexity. See [Plans & Credits](/introduction/plans-and-credits) for full details.
+</Note>

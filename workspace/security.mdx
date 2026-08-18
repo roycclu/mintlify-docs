@@ -1,0 +1,184 @@
+---
+title: "Lovable Security: Scans, Compliance, and Controls"
+sidebarTitle: "Security"
+description: "Scans run on every publish. Business and Enterprise add deep scans, audit logs, SSO, SCIM, data residency, and SOC 2 Type II and ISO 27001 compliance."
+---
+
+Security in Lovable isn't a separate step you bolt on after building — it's built into the publish flow. Every time you publish, a security scan runs automatically. Workspace admins can block publishing on critical findings, schedule recurring deep scans across all projects, and review a Security Center dashboard that shows the health of every app in the workspace at a glance. For teams that need enterprise-grade controls, Lovable is SOC 2 Type II and ISO 27001 certified with full SSO, SCIM, role-based access, and audit logging included.
+
+## Automatic Security Scanning
+
+Lovable runs a security scan automatically every time you publish. The scan checks database configurations, Row Level Security (RLS) policies, cloud project settings, and known misconfiguration patterns. It runs in roughly 10–15 seconds and surfaces findings before your changes reach the live environment.
+
+<Tabs>
+  <Tab title="Basic Scan">
+    **Runs on:** every publish, automatically
+
+    **Duration:** ~10–15 seconds
+
+    **Checks include:**
+    - Database configuration and RLS policies
+    - Supabase project settings and public API exposure
+    - Known misconfiguration patterns
+    - Cloud project access controls
+
+    If critical findings are detected and an admin has enabled **Block on critical findings**, the publish is halted until the issues are resolved.
+  </Tab>
+  <Tab title="Deep Scan">
+    **Runs on:** on demand (manually triggered), or on a schedule (Business/Enterprise)
+
+    **Duration:** ~3 minutes
+
+    **Checks include:**
+    - Full codebase analysis
+    - Dependency vulnerability scanning
+    - Comprehensive RLS and auth flow review
+    - All basic scan checks
+
+    Deep scans give you an audit-ready security report suitable for SOC 2, ISO 27001, and investor due diligence reviews.
+  </Tab>
+</Tabs>
+
+### Auto-Fix and Publish Blocking
+
+Workspace admins can configure two scan policies from **Workspace Settings → Security**:
+
+<Accordion title="Auto-fix">
+  When enabled, Lovable automatically resolves non-breaking security findings during the basic scan. This keeps your projects clean without requiring manual intervention on every build. Auto-fix only applies to findings where the resolution is unambiguous and does not change application behavior.
+</Accordion>
+
+<Accordion title="Block on critical findings">
+  When enabled, any publish that would introduce a critical security issue is blocked. The publisher sees the findings and must resolve them before the deployment proceeds. This prevents accidental exposure of misconfigured databases or open access policies.
+</Accordion>
+
+<Accordion title="Scheduled deep scans (Business/Enterprise)">
+  Business and Enterprise workspace admins can schedule recurring deep scans across all workspace projects — daily, weekly, or monthly. Scheduled scans run automatically and surface new findings in the Security Center, even if no one has published recently.
+</Accordion>
+
+## Security Center
+
+Workspace admins have access to a **Security Center** view that shows the security status of every project in the workspace on a single screen. From here you can:
+
+- See which projects have unresolved findings
+- Trigger a deep scan on any project
+- Review finding history and resolution timelines
+- Track which projects have never been scanned
+
+Access the Security Center from **Workspace Settings → Security Center**.
+
+## Secrets Management
+
+API keys, database credentials, and other secrets are handled securely throughout the Lovable platform:
+
+- **Encrypted at rest**: secrets are never stored in plaintext.
+- **Environment-scoped**: secrets are tied to specific environments (Test vs. Live) and are not shared across them unless explicitly configured.
+- **Never exposed in logs or interfaces**: secrets do not appear in build logs, prompt history, or any user-facing interface.
+- **Role-controlled access**: only members with the appropriate role can view or modify secrets for a project.
+- **Rotatable without redeployment**: you can update or revoke a secret without redeploying the entire application.
+
+## Data Protection and Privacy
+
+<Accordion title="AI model training">
+  **Business and Enterprise plan data is not used to train AI models.** Prompts, code, and workspace data from these plans are excluded from training pipelines.
+
+  Free and Pro users can opt out by going to **Account Settings → Privacy** and enabling **Data collection opt out**.
+
+  Where third-party AI providers are used, contractual agreements restrict the training and retention of customer data by those providers.
+</Accordion>
+
+<Accordion title="Data residency">
+  Lovable Cloud supports regional data hosting in the **EU**, **US**, and **Australia**. Customer data is stored in the region you select at workspace creation and does not move across regions by default.
+
+  Your selected region applies to project data, build history, and workspace configuration. To choose or confirm your data region, check **Workspace Settings → Security → Data residency**.
+</Accordion>
+
+<Accordion title="Data isolation">
+  Lovable is a multi-tenant platform with logical isolation between workspaces and projects. Customer data is not accessible across accounts. Isolation controls are enforced at both the application and infrastructure layers. Each workspace and project is a separate boundary — a misconfiguration in one project does not affect another.
+</Accordion>
+
+## Access Controls (Enterprise)
+
+Enterprise plan workspaces have the full suite of identity and access management controls:
+
+<CardGroup cols={2}>
+  <Card title="SSO / SAML" icon="key" href="/workspace/sso-scim">
+    Enforce login through Okta, Microsoft Entra, Google Workspace, or any SAML 2.0 / OIDC provider.
+  </Card>
+  <Card title="SCIM Provisioning" icon="users-gear" href="/workspace/sso-scim">
+    Automatically provision and deprovision accounts when employees join or leave your IdP directory.
+  </Card>
+  <Card title="Role-Based Permissions" icon="shield-halved" href="/workspace/collaboration">
+    View, edit, approve, and publish are separate roles. Enterprise teams can require approval before changes go live.
+  </Card>
+  <Card title="Audit Logs" icon="file-lines" href="/workspace/collaboration">
+    Every publish event is logged with user attribution, timestamp, and project details. Logs are accessible to workspace admins.
+  </Card>
+</CardGroup>
+
+### Publishing Approval Workflow
+
+On Enterprise plans, workspace admins can configure a mandatory approval step before any change goes live:
+
+1. An **Editor** makes changes and submits for approval.
+2. An **Approver** reviews the diff and approves or rejects.
+3. A **Publisher** (or the approver, depending on configuration) triggers the deployment.
+
+All steps are logged in the audit trail with full user attribution.
+
+## Infrastructure Security
+
+Lovable Cloud is built on a hardened infrastructure stack:
+
+| Control | Details |
+|---|---|
+| **WAF protection** | Web Application Firewall filters malicious traffic at the edge |
+| **Network isolation** | Workspaces and projects are network-isolated from each other |
+| **Encrypted data storage** | All data is encrypted at rest and in transit (TLS 1.2+) |
+| **Adaptive rate limiting** | Rate limits are enforced at IP, user, and workspace levels to prevent abuse |
+| **Continuous monitoring** | Platform activity is monitored continuously for anomalous behavior and misuse |
+
+## Compliance Certifications
+
+Lovable has been independently audited and certified for the following standards:
+
+<AccordionGroup>
+  <Accordion title="SOC 2 Type II">
+    Lovable's security controls, availability, and confidentiality practices have been independently audited against the AICPA Trust Services Criteria. SOC 2 Type II reports are available to Enterprise customers under NDA. Contact your account manager or [request a report](https://lovable.dev/enterprise-form).
+  </Accordion>
+  <Accordion title="ISO 27001">
+    Lovable is certified to ISO 27001, the international standard for information security management systems. Certification covers the design, development, and operation of the Lovable platform.
+  </Accordion>
+  <Accordion title="GDPR">
+    Lovable supports GDPR compliance requirements including data subject rights, data processing agreements (DPAs), and subprocessor transparency. DPAs are available for Business and Enterprise customers. See [lovable.dev/data-processing-agreement](https://lovable.dev/data-processing-agreement).
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  To report a security vulnerability or concern, visit [lovable.dev/security-issues](https://lovable.dev/security-issues). For compliance documentation, security questionnaires, and audit reports, visit the [Lovable Trust Center](https://trust.lovable.dev).
+</Note>
+
+## Security Best Practices for Your Apps
+
+The Lovable platform keeps its own infrastructure secure — but the apps you build also need to be configured correctly. A few key practices:
+
+- **Enable Row Level Security (RLS)** on all Supabase tables that store user data. The security scanner will flag tables with RLS disabled.
+- **Use environment-scoped secrets** — never hard-code API keys or credentials in your project code.
+- **Review your auth configuration** — ensure that unauthenticated routes are intentional, not accidental.
+- **Run a deep scan before launch** to catch issues that the basic scan may not surface.
+
+For a complete guide to building secure apps with Lovable, see [Security best practices](/tips-tricks/security-best-practices).
+
+<CardGroup cols={2}>
+  <Card title="SSO & SCIM Setup" icon="shield-check" href="/workspace/sso-scim">
+    Configure identity provider integration and automated provisioning.
+  </Card>
+  <Card title="Collaboration & Roles" icon="users" href="/workspace/collaboration">
+    Manage member roles, permissions, and publishing approval workflows.
+  </Card>
+  <Card title="Workspace Overview" icon="house" href="/workspace/overview">
+    Understand workspace structure, settings, and project management.
+  </Card>
+  <Card title="Security Best Practices" icon="shield" href="/tips-tricks/security-best-practices">
+    Apply security best practices to the apps you build on Lovable.
+  </Card>
+</CardGroup>

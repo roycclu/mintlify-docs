@@ -1,0 +1,84 @@
+---
+title: "Use Test and Live Environments to Build Safely"
+sidebarTitle: "Environments"
+description: "Preview and validate changes in a Test environment before promoting them to Live. Keep your users on stable code while you iterate."
+---
+
+Lovable gives every project two distinct environments: **Test** and **Live**. Test is where you build and validate — it reflects your latest work-in-progress but never touches real users. Live is your production environment — the version your users actually see and interact with. Keeping them separate means you can move fast without the risk of breaking something for the people who depend on your app.
+
+## Why Environments Matter
+
+When you're actively building, you're constantly making changes: adding features, redesigning flows, connecting new integrations. Without an environment boundary, every change you make is immediately visible to your users. Environments solve this by giving you a safe staging area to test your work before it goes live — even if you're iterating quickly or making significant changes.
+
+## The Test Environment
+
+The Test environment is your personal sandbox. Every change you make in the Lovable editor is reflected in Test immediately — you don't have to publish to see your work. You can:
+
+- **Preview the full app** at the Test URL to see exactly how it behaves
+- **Share the Test URL** with teammates, stakeholders, or beta users to collect feedback before release
+- **Test authentication flows**, form submissions, database writes, and integrations without touching production data
+- **Iterate freely** knowing nothing you do in Test affects your Live users
+
+Test has its own isolated database state, so writes and changes made during testing don't pollute your production data.
+
+<Tip>
+  Always test authentication flows, payment integrations, and database migrations in the Test environment before promoting to Live. These are the areas most likely to cause user-facing issues if something goes wrong.
+</Tip>
+
+## Promoting Changes to Live
+
+When you're satisfied with how your changes look and behave in Test, you promote them to production by clicking **Publish to Live**. Lovable runs an automatic security scan, and once it passes, your changes replace the current Live version.
+
+<Steps>
+  <Step title="Iterate in the editor">
+    Make changes in the Lovable editor. Your Test environment updates in real time as you work.
+  </Step>
+  <Step title="Validate in Test">
+    Open the Test URL and verify your changes behave as expected. Share it with stakeholders for a final review if needed.
+  </Step>
+  <Step title="Publish to Live">
+    Click **Publish to Live** in the editor toolbar. Lovable runs a security scan (approximately 10–15 seconds) and then deploys your changes to production.
+  </Step>
+  <Step title="Monitor Live">
+    After publishing, check your Live environment to confirm everything is working as expected. Use [Project Monitoring](/workspace/overview) to track errors and performance.
+  </Step>
+</Steps>
+
+## Rolling Back to a Previous Version
+
+If a Live deploy introduces an unexpected issue, you can revert to a previous version from your project history. Lovable keeps a full record of every publish event, so you can quickly restore the last known-good state without losing your work-in-progress in Test.
+
+To roll back, open your project's **History** panel, find the version you want to restore, and click **Revert to this version**. Your Live environment immediately reverts while your Test environment remains at its current state.
+
+## Environment Boundaries and Data Isolation
+
+Lovable enforces strict separation between Test and Live at the infrastructure level. Environment boundaries are explicitly evaluated before any change is promoted — it is not possible to accidentally overwrite Live data from Test or vice versa.
+
+<Note>
+  Environment boundaries are enforced by Lovable's infrastructure, not just by convention. Changes you make in the editor and Test environment cannot accidentally affect your Live environment or its data until you explicitly choose to publish.
+</Note>
+
+## Team Permissions and Approval Workflows
+
+On **Business** and **Enterprise** plans, publishing to Live is a separate permission from editing. Your organization can enforce an approval step so that changes must be reviewed and signed off before they reach production. This supports common team workflows like:
+
+- A developer builds a feature and marks it ready for review
+- A team lead or product manager reviews the Test version and approves it
+- An authorized publisher promotes the approved changes to Live
+
+This separation keeps your production environment stable and gives your team a clear, auditable release process. All publish events are logged with user attribution for compliance and audit purposes.
+
+<CardGroup cols={2}>
+  <Card title="Publish Your App" icon="rocket" href="/publishing/publish-your-app">
+    Understand the full publish flow, including security scanning and draft vs. live states.
+  </Card>
+  <Card title="Lovable Cloud" icon="cloud" href="/publishing/lovable-cloud">
+    Learn about the infrastructure running your Test and Live environments.
+  </Card>
+  <Card title="Custom Domain" icon="globe" href="/publishing/custom-domain">
+    Connect your own domain to your Live environment.
+  </Card>
+  <Card title="Workspace & Team" icon="users" href="/workspace/overview">
+    Set up roles and permissions to control who can publish to Live.
+  </Card>
+</CardGroup>

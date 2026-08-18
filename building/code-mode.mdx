@@ -1,0 +1,86 @@
+---
+title: "View and Edit Your App's Code in Lovable"
+sidebarTitle: "Code Mode"
+description: "Code Mode is a built-in editor to read and modify your project's source files — ideal for fine-tuning logic, debugging, and adding custom functionality."
+---
+
+Code Mode is a built-in code editor inside Lovable that lets you read and modify your project's source files directly in the browser. While Agent Mode generates and applies changes through the AI, Code Mode gives you direct access to the underlying React, Tailwind, and Supabase code so you can make precise edits, review file structure, and inspect implementation details without leaving the Lovable interface.
+
+## When to use Code Mode
+
+Code Mode is the right tool when you need surgical control over a specific part of your project:
+
+<CardGroup cols={2}>
+  <Card title="Fine-tune logic" icon="code">
+    Adjust a function's behavior, fix a condition, or tweak a calculation directly without describing the change through a prompt.
+  </Card>
+  <Card title="Debug specific issues" icon="bug">
+    Inspect the exact code that's running, trace through component logic, and identify the root cause of unexpected behavior.
+  </Card>
+  <Card title="Add custom functionality" icon="wrench">
+    Write code that falls outside a natural language description — complex algorithms, custom hooks, or third-party library usage.
+  </Card>
+  <Card title="Review implementations" icon="eye">
+    Read through what Agent Mode generated to understand the structure before handing off to developers or deploying to production.
+  </Card>
+</CardGroup>
+
+## Navigating your project in Code Mode
+
+Code Mode gives you a full file tree of your project. Here's where the key pieces of your app live:
+
+| Path | What's there |
+|------|-------------|
+| `src/pages/` | Top-level page components, one file per route |
+| `src/components/` | Reusable React components |
+| `src/integrations/supabase/` | Supabase client setup, generated types, and query helpers |
+| `src/hooks/` | Custom React hooks for data fetching and shared logic |
+| `src/lib/` | Utility functions and constants |
+| `tailwind.config.ts` | Tailwind CSS theme, colors, and font configuration |
+
+Click any file in the tree to open it in the editor. Changes are saved and reflected in the live preview when you click **Save**.
+
+## What you can do in Code Mode
+
+- **View all files** — browse the complete project structure, including files Agent Mode has never touched
+- **Edit components** — modify JSX, props, event handlers, and styling directly
+- **Inspect Supabase schemas** — review the generated types in `src/integrations/supabase/types.ts` to understand your data model
+- **Review routing** — check how pages are wired together in the router configuration
+- **Read package configuration** — inspect `package.json` to see which libraries are installed
+
+## Code Mode vs GitHub sync
+
+Both Code Mode and GitHub give you access to your source code, but they serve different purposes:
+
+<Tabs>
+  <Tab title="Code Mode">
+    Code Mode is for quick in-browser edits when you're working inside Lovable. It's ideal for one-off fixes and inspections. Changes go live in the preview immediately and are saved to your Lovable project.
+  </Tab>
+  <Tab title="GitHub Sync">
+    [GitHub sync](/integrations/github) is for full developer workflow integration — pull requests, branch management, code review, and working with external tools like VS Code or Cursor. Use GitHub when handing off to developers or building a collaborative engineering workflow.
+  </Tab>
+</Tabs>
+
+## Handing off to developers
+
+When you're ready to bring in a developer, your Lovable project is a standard, idiomatic codebase any React developer can work with:
+
+<Steps>
+  <Step title="Connect your GitHub repository">
+    Go to **Settings → GitHub** in your project and connect or create a repository. Lovable pushes your full project code to GitHub.
+  </Step>
+  <Step title="Share the repository">
+    Invite developers to the GitHub repo. They can clone it, run it locally with `npm install && npm run dev`, and contribute using standard Git workflows.
+  </Step>
+  <Step title="Developers extend from there">
+    The codebase uses React, Tailwind CSS, and Supabase — technologies any modern frontend or full-stack developer will recognize immediately. No proprietary build system or lock-in.
+  </Step>
+</Steps>
+
+<Warning>
+  Direct code edits in Code Mode can create inconsistencies if you later use Agent Mode on the same area of the app. When Agent Mode reads your files before making changes, it will incorporate your manual edits — but if your edits significantly change the structure from what Agent Mode last knew, the AI may not understand the context fully. Whenever possible, describe structural changes to Lovable through a prompt so it maintains a coherent picture of the whole codebase.
+</Warning>
+
+<Tip>
+  Code Mode is also useful for reviewing AI-generated code before deploying. Scan the Supabase integration files to confirm row-level security policies are in place, or check the authentication flow to ensure tokens are handled correctly.
+</Tip>

@@ -1,0 +1,157 @@
+---
+title: "Lovable Integrations: Connect Your Tech Stack"
+sidebarTitle: "Overview"
+description: "Connect Lovable to 80+ tools and services. Pre-built connectors and MCP servers let your app read, write, and stay in sync with your whole stack."
+---
+
+Lovable doesn't live in a silo. From the moment you start building, you can connect your app to the tools and services your team already relies on — your database, payment processor, CRM, analytics platform, communication tools, and more. Every integration is designed so you spend time describing what you want to build, not wiring up APIs by hand.
+
+## Two types of integrations
+
+Lovable integrations come in two flavors, each suited to different scenarios.
+
+<CardGroup cols={2}>
+  <Card title="Connectors" icon="plug" href="/integrations/connectors">
+    Pre-built integrations for 80+ services. Authenticate with OAuth, then describe how you want to use the data. Lovable handles token refresh, revocation, and security — credentials never touch your app code.
+  </Card>
+  <Card title="MCP Server" icon="server" href="/integrations/mcp-server">
+    Drive Lovable from the AI client you already use. The Lovable MCP Server exposes create, iterate, deploy, and more as tools any agent can call from Cursor, Claude, or VS Code.
+  </Card>
+  <Card title="Supabase" icon="database" href="/integrations/supabase">
+    PostgreSQL database, authentication, file storage, and real-time features. Provisioned automatically with Lovable Cloud or connect your own project.
+  </Card>
+  <Card title="GitHub" icon="github" href="/integrations/github">
+    Sync every build to a GitHub repo from day one. Share with your engineering team, open PRs, and deploy anywhere React apps are supported.
+  </Card>
+  <Card title="Stripe Payments" icon="credit-card" href="/integrations/stripe-payments">
+    Add subscriptions, one-time checkout, and billing management to your app without writing payment logic from scratch.
+  </Card>
+</CardGroup>
+
+## How connectors work
+
+Connectors are OAuth-based integrations. When you (or a user of your app) connects an account, Lovable's gateway handles the full OAuth handshake, stores tokens securely, and refreshes them automatically. Your API credentials never appear in your app's source code or client bundle.
+
+Connections are **per-user**: each person who signs in to your app connects their own accounts — their Google Drive, their CRM records, their calendar. Lovable's gateway manages OAuth, token refresh, and revocation for every user independently.
+
+Connectors also work **offline**. Scheduled syncs and background jobs keep running even when no one is actively using the app, so you can build agents that check for new orders, flag anomalies, or send notifications around the clock.
+
+<Tip>
+  Connectors don't cost credits. Credits are only consumed when Lovable generates or modifies your app's code.
+</Tip>
+
+## Integration categories
+
+### Productivity
+
+Build apps that read from and write to the tools your team lives in every day.
+
+| Tool | What you can do |
+|------|----------------|
+| **Gmail** | Read, send, and label messages |
+| **Google Calendar** | Read and write events |
+| **Google Docs** | Create and edit documents |
+| **Google Drive** | List, search, and read files |
+| **Google Sheets** | Read and write spreadsheet data |
+| **Google Slides** | Read deck content |
+| **Microsoft Excel** | Work with spreadsheet data |
+| **Microsoft OneDrive** | Access files and folders |
+| **Microsoft Outlook** | Manage email and calendars |
+| **Microsoft Teams** | Collaborate in chats and channels |
+| **Notion** | Build from your team's docs and wikis |
+| **Airtable** | Spreadsheet-database hybrid and automation |
+
+### Development
+
+Connect your app to the tools your engineering team already uses.
+
+| Tool | What you can do |
+|------|----------------|
+| **GitHub** | Read repos, issues, and pull requests |
+| **Linear** | Read and write issues, cycles, and projects |
+| **Atlassian (Jira/Confluence)** | Turn specs into working software |
+| **Sentry** | Track errors, issues, and performance |
+| **AWS S3** | Store and retrieve files from S3 buckets |
+| **Aikido** | Application security scanning |
+
+### Commerce & Payments
+
+Ship monetized apps without building payment infrastructure from scratch.
+
+| Tool | What you can do |
+|------|----------------|
+| **Stripe** | Accept payments, billing, and subscriptions |
+| **Shopify** | Build on your storefront, products, and orders |
+| **WooCommerce** | Manage products, orders, and customers |
+| **Chargebee** | Manage subscriptions, invoices, and billing |
+| **Xero** | Invoices, bills, and financial reports |
+
+### CRM & Sales
+
+Surface CRM data inside your app and keep records in sync.
+
+| Tool | What you can do |
+|------|----------------|
+| **HubSpot** | Connect CRM, marketing, and sales workflows |
+| **Salesforce** | Connect your Salesforce CRM data |
+| **Pipedrive** | Manage deals, contacts, and pipelines |
+| **Zoho CRM** | Read and manage leads, contacts, and deals |
+
+### Analytics
+
+Build dashboards and internal tools on top of your data warehouses and analytics platforms.
+
+| Tool | What you can do |
+|------|----------------|
+| **Google Analytics** | Track page views, events, and conversions |
+| **Amplitude** | Spot what users actually do |
+| **PostHog** | Query analytics, feature flags, and experiments |
+| **BigQuery** | Build dashboards on live warehouse data |
+| **Snowflake** | Surface live results from your data warehouse |
+| **Databricks** | Turn SQL warehouses into live apps |
+
+### Communication
+
+Send notifications, messages, and transactional email directly from your app.
+
+| Tool | What you can do |
+|------|----------------|
+| **Slack** | Read messages, post updates, and send notifications |
+| **Resend** | Send transactional email at scale |
+| **Twilio** | Send SMS, trigger voice calls, and handle two-way messaging |
+| **Telegram** | Send messages and run bot workflows |
+
+### AI & Automation
+
+Add intelligence and workflow automation to any Lovable app.
+
+| Tool | What you can do |
+|------|----------------|
+| **n8n** | Automate across 400+ services |
+| **ElevenLabs** | Add human-sounding voice to your app |
+| **Replicate** | Run AI models for images, video, audio, and text |
+| **Perplexity** | Add real-time web search with cited sources |
+| **Firecrawl** | Scrape websites into clean, structured data |
+| **Inngest** | Run durable workflows and background jobs |
+
+## What you can build
+
+<CardGroup cols={3}>
+  <Card title="Background agents" icon="robot" href="/integrations/connectors">
+    Build apps that chase overdue invoices, draft follow-ups, and reschedule missed calls — all while you're offline.
+  </Card>
+  <Card title="Team tools" icon="users" href="/integrations/connectors">
+    Pull in Linear, Figma, and Slack so each teammate sees only the tasks and context scoped to their access.
+  </Card>
+  <Card title="Anomaly detection" icon="bell" href="/integrations/connectors">
+    Schedule nightly jobs that check governed metrics and post anything outside bounds to Slack before anyone has to ask.
+  </Card>
+</CardGroup>
+
+## Custom integrations with MCP
+
+If a tool you need isn't in the connector catalog, you can connect it yourself using the **Model Context Protocol (MCP)**. Any tool with a public MCP server can be wired into Lovable in a few steps — no custom code required. See the [MCP Servers guide](/integrations/mcp-server) for details.
+
+<Note>
+  New connectors are added every week. If you don't see the tool you need, describe it in the Lovable chat — Lovable can often work with a service's REST API directly, or suggest the best connector to use.
+</Note>

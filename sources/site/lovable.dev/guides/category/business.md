@@ -1,0 +1,7 @@
+# Source: https://lovable.dev/guides/category/business
+
+# Business
+
+Business resources and strategies for builders.
+
+[![How to Start a Restaurant Business: Complete Guide](https://lovable.dev/cdn-cgi/image/width=3840,f=auto,fit=scale-down,quality=95/https://assets.lovable.dev/content/guides/thumbnails/how-to-start-a-restaurant-business.jpg)\\ \\ Business\\ \\ **How to Start a Restaurant Business: Complete Guide**\\ \\ Learn how to start a restaurant business with realistic costs, funding strategies, and digital infrastructure. Build custom tools to eliminate $50K+ in annual fees.\\ \\ Lovable Team·February 23, 2026](https://lovable.dev/guides/how-to-start-a-restaurant-business) [![How to Create a Cleaning Business Plan That Actually Gets You Clients](https://lovable.dev/cdn-cgi/image/width=3840,f=auto,fit=scale-down,quality=95/https://assets.lovable.dev/content/guides/thumbnails/cleaning-business-plan.jpg)\\ \\ Business\\ \\ **How to Create a Cleaning Business Plan That Actually Gets You Clients**\\ \\ Skip the 30-page doc. Launch your cleaning business in days with this action-first guide covering pricing, legal setup, client acquisition, and digital tools.\\ \\ Lovable Team·February 23, 2026](https://lovable.dev/guides/cleaning-business-plan)

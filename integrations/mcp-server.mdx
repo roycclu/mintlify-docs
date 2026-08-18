@@ -1,0 +1,225 @@
+---
+title: "Build Lovable Apps from Cursor, Claude, and VS Code"
+sidebarTitle: "MCP Server"
+description: "The Lovable MCP Server lets any AI agent create, iterate, and deploy Lovable projects — from Cursor, Claude Desktop, claude.ai, or VS Code."
+---
+
+The Lovable MCP Server exposes Lovable's core capabilities — creating projects, sending chat messages, reading files, running SQL, deploying to production — as tools that any MCP-compatible AI agent can call. If you already work in Cursor, Claude, or VS Code, you can drive Lovable directly from your existing workflow without switching context.
+
+The MCP Server is available on every plan, including Free.
+
+<Note>
+  The Lovable MCP Server is different from Lovable's Chat Connectors. **Chat connectors** let Lovable connect to your external tools (Notion, Linear, Slack, and so on) during a build. **The MCP Server** is the reverse: it lets your AI assistant or editor connect to and drive Lovable programmatically.
+</Note>
+
+## Supported clients
+
+<CardGroup cols={2}>
+  <Card title="Claude Desktop" icon="message-circle" href="https://claude.ai/download">
+    macOS and Windows. Add Lovable through Claude's connector settings.
+  </Card>
+  <Card title="claude.ai" icon="globe" href="https://claude.ai">
+    Browser-based Claude. Add Lovable as a connector from the composer.
+  </Card>
+  <Card title="Claude Code" icon="terminal" href="https://claude.ai/code">
+    Terminal-based agentic coding with Claude. Connect Lovable as an MCP server.
+  </Card>
+  <Card title="Cursor" icon="mouse-pointer" href="https://cursor.com">
+    Add the Lovable MCP endpoint in Cursor Settings → MCP.
+  </Card>
+  <Card title="VS Code" icon="code" href="https://code.visualstudio.com">
+    Install the MCP extension and add the Lovable server endpoint.
+  </Card>
+</CardGroup>
+
+Authentication uses **OAuth only** — there are no API keys to manage or rotate. Lovable uses your existing user permissions, so the MCP server can only access workspaces you already have access to.
+
+## Available tools
+
+The Lovable MCP Server exposes the following tools to your agent:
+
+<AccordionGroup>
+  <Accordion title="create_project — Spin up a new Lovable project">
+    Scaffolds a new Lovable project with React, Tailwind CSS, and shadcn/ui. Returns the project ID and a preview URL.
+
+    **Parameters:** `name` (string), `description` (optional string)
+  </Accordion>
+
+  <Accordion title="send_message — Iterate on a project via chat">
+    Sends a chat message to Lovable exactly as if you typed it in the editor. Lovable reads the current code, makes the requested changes, and rebuilds the preview.
+
+    **Parameters:** `project_id` (string), `message` (string)
+  </Accordion>
+
+  <Accordion title="read_file — Read a source file">
+    Returns the contents of any file in the project. Use this to inspect generated code, verify changes, or pass file contents to another tool.
+
+    **Parameters:** `project_id` (string), `path` (string)
+  </Accordion>
+
+  <Accordion title="list_files — List project files">
+    Returns the file tree of a Lovable project. Useful for discovering which components exist before reading or modifying them.
+
+    **Parameters:** `project_id` (string)
+  </Accordion>
+
+  <Accordion title="execute_sql — Run SQL against the Lovable Cloud database">
+    Executes a SQL statement against the Supabase database attached to the project. Supports reads, writes, and schema changes.
+
+    **Parameters:** `project_id` (string), `sql` (string)
+  </Accordion>
+
+  <Accordion title="deploy — Trigger a production deploy">
+    Deploys the current state of the project to Lovable Cloud and returns a live production URL.
+
+    **Parameters:** `project_id` (string)
+  </Accordion>
+
+  <Accordion title="list_projects — List all your Lovable projects">
+    Returns metadata for all projects in your workspace, including project IDs, names, and preview URLs.
+
+    **Parameters:** none (scoped to your workspace)
+  </Accordion>
+
+  <Accordion title="add_connector — Add a connector from the catalog">
+    Adds a connector from the Lovable connector catalog to a project. The connector must be authenticated in your Lovable workspace first.
+
+    **Parameters:** `project_id` (string), `connector_id` (string)
+  </Accordion>
+
+  <Accordion title="set_knowledge — Set workspace or project knowledge">
+    Sets persistent knowledge for a workspace or project, so Lovable follows your brand guidelines, API patterns, or naming conventions on every subsequent build.
+
+    **Parameters:** `scope` (`workspace` | `project`), `project_id` (string, required if scope is `project`), `knowledge` (string)
+  </Accordion>
+</AccordionGroup>
+
+## Setup guide
+
+### Claude Desktop and claude.ai
+
+<Steps>
+  <Step title="Open the connector panel">
+    In Claude, click the **+** sign in the composer toolbar.
+  </Step>
+  <Step title="Find the Lovable connector">
+    Navigate to **Connectors → Browse Connectors**, then search for **Lovable**.
+  </Step>
+  <Step title="Connect and authenticate">
+    Click **Connect**. Claude opens an OAuth prompt — sign in to your Lovable account when prompted. The Lovable tools appear in the composer's tool menu once authentication is complete.
+  </Step>
+</Steps>
+
+### Cursor
+
+<Steps>
+  <Step title="Open Cursor Settings → MCP">
+    Press `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Windows/Linux), then search for **Open MCP Settings**.
+  </Step>
+  <Step title="Add the Lovable MCP server">
+    Click **Add new MCP server**, enter a name (e.g., `lovable`), and paste the Lovable MCP endpoint URL.
+  </Step>
+  <Step title="Complete OAuth authentication">
+    Cursor opens a browser window to complete the OAuth flow. Sign in to your Lovable account to authorize the connection. The Lovable tools become available in Cursor's agent context.
+  </Step>
+</Steps>
+
+### VS Code
+
+<Steps>
+  <Step title="Install the MCP extension">
+    Open the VS Code Extensions panel and search for **MCP** (Model Context Protocol). Install the extension that matches your workflow.
+  </Step>
+  <Step title="Add the Lovable MCP server endpoint">
+    In the MCP extension settings, add a new server entry pointing to the Lovable MCP endpoint.
+  </Step>
+  <Step title="Authenticate with your Lovable account">
+    Complete the OAuth flow when VS Code prompts you. After authentication, the Lovable tools are available to agents running inside VS Code.
+  </Step>
+</Steps>
+
+## Example agentic workflow
+
+The following example shows a multi-step agent session that creates a new Lovable project, builds a landing page, inspects the generated code, and deploys to production.
+
+```typescript
+// 1. Create a new project
+const project = await mcp.call("create_project", {
+  name: "receipt-scanner-landing",
+  description: "SaaS landing page for an AI receipt scanner app"
+});
+// → { project_id: "proj_abc123", preview_url: "https://receipt-scanner.lovable.app" }
+
+// 2. Build the landing page
+await mcp.call("send_message", {
+  project_id: project.project_id,
+  message: "Build a landing page with a hero section, a three-tier pricing table, and a waitlist form that saves emails to Supabase"
+});
+
+// 3. Inspect the waitlist form component
+const formCode = await mcp.call("read_file", {
+  project_id: project.project_id,
+  path: "src/components/WaitlistForm.tsx"
+});
+console.log(formCode);
+
+// 4. Create the waitlist table in the database
+await mcp.call("execute_sql", {
+  project_id: project.project_id,
+  sql: `
+    CREATE TABLE waitlist (
+      id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      email text NOT NULL UNIQUE,
+      created_at timestamptz DEFAULT now()
+    );
+  `
+});
+
+// 5. Deploy to production
+const deployment = await mcp.call("deploy", {
+  project_id: project.project_id
+});
+console.log("Live at:", deployment.url);
+// → "Live at: https://receipt-scanner.lovable.app"
+```
+
+This pattern works identically whether you're running the agent in Claude, Cursor, VS Code, or any other MCP-compatible client.
+
+## Persistent knowledge
+
+Use `set_knowledge` to give Lovable consistent context across every agent run in your workspace:
+
+```typescript
+await mcp.call("set_knowledge", {
+  scope: "workspace",
+  knowledge: `
+    Always use Inter for body text and Cal Sans for headings.
+    Primary brand color is #6366F1 (indigo).
+    All new tables must include created_at and updated_at columns.
+    Use Resend for transactional email — never Sendgrid.
+  `
+});
+```
+
+After setting workspace knowledge, every subsequent `send_message` call in that workspace will respect these instructions automatically.
+
+<Note>
+  **Enterprise customers:** contact your account executive to enable the Lovable MCP Server for your workspace. Enterprise workspaces may require additional configuration before MCP access is available.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Connectors" icon="plug" href="/integrations/connectors">
+    Use the MCP `add_connector` tool to wire up Gmail, Linear, Slack, and more from inside your agent.
+  </Card>
+  <Card title="Supabase" icon="database" href="/integrations/supabase">
+    Learn how the `execute_sql` tool interacts with your Lovable Cloud database.
+  </Card>
+  <Card title="GitHub Sync" icon="github" href="/integrations/github">
+    Combine the MCP Server with GitHub sync so every agentic build is committed to your repo automatically.
+  </Card>
+  <Card title="Integrations overview" icon="grid-2" href="/integrations/overview">
+    See the full picture of how Lovable integrations fit together.
+  </Card>
+</CardGroup>

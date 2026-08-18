@@ -1,0 +1,103 @@
+{
+  "projectType": "saas",
+  "projectName": "Lovable",
+  "projectDescription": "Lovable is an AI-powered platform that lets anyone build, deploy, and manage full-stack web apps and websites by describing what they want in plain language.",
+  "theme": "almond",
+  "primaryColor": "#1c1c1c",
+  "lightColor": "#fcfbf8",
+  "darkColor": "#fc5f11",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction/welcome",
+              "introduction/quick-start",
+              "introduction/plans-and-credits",
+              "introduction/faq"
+            ]
+          },
+          {
+            "group": "Building",
+            "pages": [
+              "building/agent-mode",
+              "building/plan-mode",
+              "building/code-mode",
+              "building/visual-editing",
+              "building/prompting-tips",
+              "building/templates"
+            ]
+          },
+          {
+            "group": "Publishing & Hosting",
+            "pages": [
+              "publishing/publish-your-app",
+              "publishing/custom-domain",
+              "publishing/environments",
+              "publishing/lovable-cloud"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/overview",
+              "integrations/supabase",
+              "integrations/github",
+              "integrations/stripe-payments",
+              "integrations/connectors",
+              "integrations/mcp-server"
+            ]
+          },
+          {
+            "group": "Workspace & Team",
+            "pages": [
+              "workspace/overview",
+              "workspace/collaboration",
+              "workspace/sso-scim",
+              "workspace/security"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "troubleshooting/common-issues",
+              "troubleshooting/debugging",
+              "troubleshooting/support"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Build full-stack apps and websites by chatting with AI in plain language",
+    "Agent Mode for autonomous building, Plan Mode for brainstorming, Code Mode for direct edits",
+    "One-click publish with Lovable Cloud (hosting, auth, database, file storage)",
+    "80+ native connectors including Google Workspace, Stripe, Supabase, Slack, GitHub, and more",
+    "Lovable MCP Server for agentic development from Cursor, Claude, and VS Code",
+    "Visual editing to tweak layouts, colors, and components without prompting",
+    "Design Systems and Workspace Themes for brand consistency across projects",
+    "Automatic security scanning on every publish (SOC 2 Type II, ISO 27001)",
+    "GitHub sync from day one — own your code, no lock-in",
+    "Enterprise SSO/SAML, SCIM provisioning, role-based access, and audit logs",
+    "Test and Live environments to safely iterate before publishing",
+    "Built-in payments via Stripe with subscription and one-time checkout support",
+    "194+ production-ready templates for apps, websites, and internal tools",
+    "Custom domains, SEO optimization, and server-side rendering included"
+  ],
+  "publicApiSurface": [
+    "POST /api/build — Lovable API: Build with URL (trigger a build from a URL prompt)",
+    "MCP tool: create_project — spin up a new Lovable project",
+    "MCP tool: send_message — iterate on a project via chat",
+    "MCP tool: read_file — read source files in a project",
+    "MCP tool: execute_sql — run SQL against Lovable Cloud database",
+    "MCP tool: deploy — trigger a production deploy and get a live URL",
+    "MCP tool: list_projects — list all projects in a workspace",
+    "Lovable Connect REST connectors — Gmail, Google Sheets, Slack, Stripe, Supabase, HubSpot, Linear, Notion, Shopify, and 70+ more",
+    "Custom MCP server support — connect any MCP-compatible API as a chat connector",
+    "GitHub Sync API — two-way sync between Lovable projects and GitHub repositories"
+  ]
+}

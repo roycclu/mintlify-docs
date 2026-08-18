@@ -1,0 +1,86 @@
+---
+title: "Connect a Custom Domain to Your Lovable App"
+sidebarTitle: "Custom Domain"
+description: "Replace your *.lovable.app URL with your own branded domain. SSL is provisioned automatically — no extra configuration needed."
+---
+
+Every Lovable app ships with a `*.lovable.app` subdomain out of the box, but a custom domain makes your app feel professional and keeps your brand front and center. Whether you want `app.yourcompany.com` or the apex domain `yourcompany.com`, Lovable handles the SSL certificate provisioning and renewal automatically — you just point your DNS records and verify.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A **Lovable Pro plan or higher** — custom domains are not available on the Free plan
+- A **domain name you own**, registered with any domain registrar (Namecheap, GoDaddy, Cloudflare, Google Domains, Route 53, etc.)
+- Access to your registrar's **DNS settings** to add records
+
+## Connecting Your Domain
+
+<Steps>
+  <Step title="Open your project settings">
+    In the Lovable editor, click the **Settings** icon (gear) in the top-right corner to open your project settings panel.
+  </Step>
+  <Step title="Navigate to Custom Domain">
+    In the project settings sidebar, click **Custom Domain**. If you haven't connected a domain yet, you'll see an empty state with a prompt to add one.
+  </Step>
+  <Step title="Enter your domain name">
+    Type the domain or subdomain you want to connect — for example, `app.yourcompany.com` or `yourcompany.com` — and click **Add Domain**.
+  </Step>
+  <Step title="Copy the DNS records">
+    Lovable displays the DNS records you need to add. These typically include a **CNAME record** for subdomains (e.g., `app.yourcompany.com`) or an **A record** for apex domains (e.g., `yourcompany.com`). Copy these values — you'll need them in the next step.
+  </Step>
+  <Step title="Add the records at your registrar">
+    Log in to your domain registrar's control panel and navigate to the DNS management section. Add the records exactly as Lovable provided them. The steps vary by registrar, but you're typically adding one or two records with a specific **Name/Host**, **Type**, and **Value/Target**.
+  </Step>
+  <Step title="Verify in Lovable">
+    Return to your Lovable project settings and click **Verify**. Lovable checks that the DNS records are in place and, once confirmed, automatically provisions an SSL/TLS certificate for your domain. Your app is now live at your custom domain over HTTPS.
+  </Step>
+</Steps>
+
+## DNS Propagation
+
+DNS changes don't take effect instantly — they propagate across the internet gradually. In most cases propagation completes within a few minutes to an hour, but it can take **up to 48 hours** in rare cases depending on your registrar and the TTL (Time To Live) settings on your DNS records.
+
+<Tip>
+  To check whether your DNS records have propagated, use a tool like [dnschecker.org](https://dnschecker.org) or run `dig app.yourcompany.com` in your terminal. If the record resolves to the expected value, Lovable's verification should succeed.
+</Tip>
+
+## SSL/TLS Certificates
+
+Lovable provisions and **renews SSL certificates automatically** using a trusted certificate authority. There is nothing for you to configure, purchase, or manage. Your custom domain will always serve over HTTPS — Lovable redirects all `http://` traffic to `https://` automatically.
+
+## Apex Domains vs. Subdomains
+
+You can connect either type of domain to your Lovable app:
+
+| Type | Example | DNS Record |
+|------|---------|------------|
+| Subdomain | `app.yourcompany.com` | CNAME record pointing to Lovable |
+| Apex domain | `yourcompany.com` | A record pointing to Lovable's IP |
+
+Both work seamlessly — choose whichever fits your use case. If you want visitors to reach your app at the bare domain (`yourcompany.com`), use the apex domain configuration. For a distinct app URL alongside a marketing site, a subdomain is typically cleaner.
+
+## Multiple Projects, Multiple Domains
+
+Each Lovable project gets its own custom domain — you cannot share a single domain across multiple projects. If you run multiple apps (for example, a customer portal and an admin tool), connect a separate domain or subdomain to each project.
+
+## Removing a Custom Domain
+
+<Warning>
+  Removing a custom domain from your project does **not** delete your app. Your app immediately reverts to its original `*.lovable.app` URL and continues to function normally. If users have bookmarked or shared your custom domain URL, they will no longer be able to reach your app through it.
+</Warning>
+
+To remove a domain, open **Project Settings → Custom Domain** and click the delete icon next to the domain you want to remove. The change takes effect immediately.
+
+## Custom Email Addresses
+
+Once your domain is connected, you can also configure your app to send transactional emails from a branded address like `hello@yourcompany.com`. This keeps your emails on-brand and improves deliverability. See [Send Branded Emails from Your Own Domain](/workspace/overview) to learn how to set up custom email sending.
+
+<CardGroup cols={2}>
+  <Card title="Publish Your App" icon="rocket" href="/publishing/publish-your-app">
+    Learn how to deploy your app to a live URL before connecting a custom domain.
+  </Card>
+  <Card title="Environments" icon="flask" href="/publishing/environments">
+    Use Test and Live environments to safely iterate before pushing to your custom domain.
+  </Card>
+</CardGroup>

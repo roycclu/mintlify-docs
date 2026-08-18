@@ -1,0 +1,202 @@
+---
+title: "Common Lovable Issues and How to Fix Them"
+sidebarTitle: "Common Issues"
+description: "Quick fixes for the most frequent issues builders encounter — from blank previews and stuck builds to credit questions and deployment problems."
+---
+
+Even the best tools have rough edges. This page covers the issues Lovable users run into most often and the fastest way to resolve each one. If you don't find your issue here, try describing the problem directly to Lovable — it can read your code and often suggests a fix on the spot.
+
+## Building Issues
+
+<AccordionGroup>
+  <Accordion title="Lovable built something different from what I asked">
+    Lovable works best when your prompt describes the exact outcome you want. Vague requests like "make it better" leave a lot of room for interpretation.
+
+    **Try these approaches:**
+    - Rewrite your prompt with more specifics — name the element ("the blue Submit button in the hero section"), describe the layout precisely, or provide measurements
+    - Attach a screenshot of what you see and annotate what should be different
+    - Reference a design by name: "Make this match the card style in the Pricing section"
+    - Use [Plan Mode](/building/plan-mode) to align on the approach before Lovable writes any code
+
+    <Tip>Paste a reference screenshot alongside your prompt. Lovable can use visual context to match what you have in mind far more accurately than text alone.</Tip>
+  </Accordion>
+
+  <Accordion title="The AI keeps making the same mistake">
+    Repeated mistakes usually mean Lovable is missing context about the design decision or underlying constraint.
+
+    **Steps to break the cycle:**
+    1. Switch to [Plan Mode](/building/plan-mode) and describe the goal — let Lovable explain its approach before it writes code. Correct it there if the plan is wrong.
+    2. Break the request into smaller, focused steps rather than one large instruction. For example, fix the layout first, then handle the data, then style it.
+    3. Use [Code Mode](/building/code-mode) to inspect the generated code and point Lovable to the specific line or function causing the problem.
+    4. Add the constraint to your project Knowledge so Lovable remembers it across messages.
+  </Accordion>
+
+  <Accordion title="My app's preview is blank or shows errors">
+    A blank preview almost always means a runtime error is preventing the app from rendering.
+
+    **How to diagnose it:**
+    1. Open your browser's developer console: press `F12` (or `Ctrl+Shift+I` / `Cmd+Option+I` on Mac) and click the **Console** tab
+    2. Look for red error messages — copy the full text of any errors you see
+    3. Paste the error into Lovable: "My preview is blank. The console shows: [paste error]"
+    4. If you're not sure what to look for, just tell Lovable: "Fix any errors in my app" — it will scan the code and resolve the most common issues
+
+    <Note>TypeScript type errors and missing environment variables are two of the most common causes of blank previews. Lovable can fix both when you share the full error text.</Note>
+  </Accordion>
+
+  <Accordion title="My build seems stuck or is taking too long">
+    Complex requests — setting up authentication, building multi-page flows, or integrating a new service — naturally take longer than simple style changes.
+
+    **What to try:**
+    - Wait a moment and check whether the build is still progressing — large tasks can take 30–60 seconds
+    - Refresh the page if the spinner hasn't moved for several minutes; your session will resume
+    - Check your credit balance in workspace settings — a build will not start if you have no credits available
+    - Break very large requests into stages: describe one feature at a time rather than asking for an entire app in a single message
+  </Accordion>
+</AccordionGroup>
+
+## Credits & Billing
+
+<AccordionGroup>
+  <Accordion title="I ran out of credits">
+    Credits are consumed each time you send a message to Lovable. The cost varies by task complexity.
+
+    **Your options:**
+    - **Free plan:** You receive 5 build credits every day, resetting at midnight. You don't need to do anything — they'll be available again tomorrow.
+    - **Upgrade your plan:** Pro and Business plans include a larger monthly credit balance so you can build without daily interruptions. Visit your workspace settings to upgrade.
+    - **Buy top-up credits:** You can purchase additional credits at any time from your workspace settings without changing your plan.
+
+    See the [Plans and Credits](/introduction/plans-and-credits) page for a full breakdown of what each plan includes.
+  </Accordion>
+
+  <Accordion title="I'm not sure what a message will cost">
+    Credit costs vary by task — a simple style tweak costs less than wiring up full authentication.
+
+    To check the cost of any past message, open the message history in your project and hover over the **three dots (⋯)** on any message. The credit cost for that message is shown in the tooltip.
+
+    As a rough guide:
+    | Task | Approximate cost |
+    |------|-----------------|
+    | "Make the button gray" | ~0.50 credits |
+    | "Remove the footer" | ~0.90 credits |
+    | "Add authentication with sign up and login" | ~1.20 credits |
+    | "Build a landing page with images" | ~1.70 credits |
+
+    [Plan Mode](/building/plan-mode) messages cost a flat 1 credit each, regardless of complexity, making it a cost-effective way to plan before building.
+  </Accordion>
+
+  <Accordion title="My credits expired">
+    Credits have an expiry window that depends on your plan type:
+
+    - **Monthly plan credits** expire two (2) months after the date they were issued
+    - **Annual plan credits** expire one (1) month after the end of your annual period
+    - **Top-up credits** last twelve (12) months from the date of purchase
+    - **Daily build credit grants** (included on all plans) expire at the end of each day and do not roll over
+
+    If you re-subscribe to any paid plan before your remaining credits expire, any unused paid credits will reactivate automatically.
+  </Accordion>
+</AccordionGroup>
+
+## Publishing & Deployment
+
+<AccordionGroup>
+  <Accordion title="My publish is blocked">
+    Lovable runs an automatic security scan every time you publish. If a critical finding is detected — such as a misconfigured database policy or exposed credentials — publishing is blocked to protect your users.
+
+    **What to do:**
+    1. Open the **Security View** for your project (available from the project menu)
+    2. Review the critical findings listed there
+    3. Ask Lovable to fix the flagged issues: "Fix the critical security findings in my project"
+    4. Run the scan again and publish once the critical findings are resolved
+
+    <Warning>Do not disable the security scan to work around a block. Critical findings represent real vulnerabilities that could expose your users' data.</Warning>
+  </Accordion>
+
+  <Accordion title="My custom domain isn't working">
+    DNS changes can take time to propagate across the internet — this is normal and expected.
+
+    **Checklist:**
+    - DNS propagation can take up to **48 hours** after you add the records, though it often completes in under an hour
+    - Verify that the DNS records (typically a `CNAME` or `A` record) were added exactly as shown in the [Custom Domain](/publishing/custom-domain) setup guide
+    - Use a DNS checker tool like [dnschecker.org](https://dnschecker.org) or run `dig yourcustomdomain.com` in your terminal to see the current DNS state
+    - Check that you added the records to the correct domain registrar if your domain uses a different registrar than your DNS provider
+
+    <Tip>If your registrar adds a trailing dot automatically (e.g. `lovable.dev.`), that's correct behavior — DNS records are fully qualified domain names.</Tip>
+  </Accordion>
+
+  <Accordion title="SSL certificate not provisioning">
+    SSL certificates are issued automatically after your DNS records propagate, so you need to wait for DNS to fully resolve first.
+
+    **Timeline:**
+    - After DNS propagates, allow up to **15 minutes** for the SSL certificate to be issued and activated
+    - In some cases, intermediate DNS providers or CDN caches can delay propagation — try a full DNS flush on your local machine
+
+    If your domain has been pointed correctly for more than 24 hours and the SSL certificate still hasn't provisioned, contact [support@lovable.dev](mailto:support@lovable.dev) with your project URL and domain name.
+  </Accordion>
+</AccordionGroup>
+
+## Authentication & Database
+
+<AccordionGroup>
+  <Accordion title="Users can't sign up or log in">
+    Authentication issues usually come down to a configuration problem in Supabase rather than a code error.
+
+    **Steps to diagnose:**
+    1. Open your project in [Supabase Studio](https://supabase.com/dashboard) and navigate to **Authentication → Settings**
+    2. Check that your **Site URL** is set to your app's published URL (not `localhost`)
+    3. Verify that your email provider is configured — Lovable supports [Resend](/integrations/overview) and custom SMTP. If no provider is set, confirmation emails won't send
+    4. Check the **Authentication → Logs** section in Supabase for specific error messages
+
+    <Note>If you're testing locally in the Lovable preview, make sure your Supabase Site URL and Redirect URLs include the preview domain as well as your published domain.</Note>
+  </Accordion>
+
+  <Accordion title="Database changes aren't saving">
+    If data appears to save but disappears on refresh, or save operations silently fail, the most common cause is a Row Level Security (RLS) policy blocking the write.
+
+    **How to diagnose:**
+    1. Open the browser console (`F12` → **Console**) and look for `403` or `401` errors from your Supabase URL
+    2. In Supabase Studio, go to **Table Editor → Policies** and check whether an RLS policy exists for the table and operation you're performing
+    3. Verify that the user is authenticated when the save occurs — operations that require a logged-in user will fail silently if the session has expired
+    4. Ask Lovable: "My database saves aren't persisting — check the RLS policies for [table name]"
+  </Accordion>
+
+  <Accordion title="I accidentally deleted data">
+    Act quickly — the sooner you reach out, the more likely recovery is possible.
+
+    **Options:**
+    - Supabase offers **Point-in-Time Recovery (PITR)** on paid plans, which lets you restore your database to any point in the last 7 days (or longer on higher tiers)
+    - Contact [Supabase Support](https://supabase.com/support) as soon as you realize the data was deleted and explain the situation
+    - If you're on a Supabase free plan, PITR is not available — but daily backups may still be accessible through Supabase Support
+
+    <Warning>Do not make any further writes to the affected table before attempting recovery. New writes can overwrite backup snapshots in some configurations.</Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Integrations
+
+<AccordionGroup>
+  <Accordion title="A connector stopped working">
+    Connected services can become disconnected if authentication tokens expire, permissions are revoked, or the third-party service changes its API.
+
+    **How to fix it:**
+    1. Lovable monitors your connected integrations and surfaces alerts in the project interface when a connection fails
+    2. Go to your project settings and find the **Integrations** or **Connectors** section
+    3. Re-authenticate the affected connector — you'll typically be redirected to the third-party service to grant access again
+    4. Test the integration by triggering the relevant action in your app
+
+    See the [Integrations overview](/integrations/overview) for connector-specific setup guides.
+  </Accordion>
+
+  <Accordion title="My Stripe payments aren't working">
+    Stripe issues usually come from mismatched API keys or a missing webhook configuration.
+
+    **Checklist:**
+    - Confirm you're using the correct key type — **test keys** (`sk_test_...`) for development, **live keys** (`sk_live_...`) for production. Mixing them breaks payment flows.
+    - Check that your **Stripe webhook endpoint** is set to your app's published URL, not a local or preview URL
+    - In the Stripe dashboard, verify that the webhook is enabled and listening for the correct events (e.g. `checkout.session.completed`, `payment_intent.succeeded`)
+    - Confirm the webhook signing secret is saved in your project's environment variables and matches what's in Stripe
+
+    <Tip>Use Stripe's built-in **webhook test** feature to send a sample event to your endpoint. If it fails, the error message will tell you exactly what's wrong.</Tip>
+
+    For a full setup walkthrough, see [Set up payments with Stripe](/integrations/stripe-payments).
+  </Accordion>
+</AccordionGroup>

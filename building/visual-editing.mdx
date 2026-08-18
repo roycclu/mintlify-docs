@@ -1,0 +1,94 @@
+---
+title: "Edit Your App's Design Visually in Lovable"
+sidebarTitle: "Visual Editing"
+description: "Click any element in the live preview to change colors, fonts, spacing, and layouts without prompting. Set workspace themes to keep your brand consistent."
+---
+
+Visual editing lets you modify your app's design by clicking directly on elements in the live preview. Instead of writing a prompt to change a button's color or a heading's font size, you select the element and adjust its properties in a panel — the same way you would in a design tool. This makes it fast to dial in exact styling, match a brand identity, or refine spacing without switching between chat and preview.
+
+## How to activate visual editing
+
+<Steps>
+  <Step title="Open the visual editor">
+    Click the **design pencil icon** in the toolbar above the live preview to enter visual editing mode. The preview border highlights to indicate the editor is active.
+  </Step>
+  <Step title="Click any element">
+    Click on any element in the preview — a button, a heading, a card, a section background. A properties panel opens on the right.
+  </Step>
+  <Step title="Make your changes">
+    Adjust colors, typography, spacing, and other style properties using the controls in the panel. Changes apply to the preview instantly.
+  </Step>
+  <Step title="Save your edits">
+    Click **Save** to commit your visual changes to the project's source files. The changes are written as Tailwind utility classes in the component's JSX.
+  </Step>
+</Steps>
+
+## What you can change visually
+
+Visual editing exposes the most common design properties without requiring knowledge of Tailwind or CSS:
+
+<CardGroup cols={2}>
+  <Card title="Colors" icon="palette">
+    Change background colors, text colors, border colors, and hover states for any element.
+  </Card>
+  <Card title="Typography" icon="font">
+    Adjust font size, font weight, line height, letter spacing, and text alignment.
+  </Card>
+  <Card title="Spacing" icon="arrows-up-down-left-right">
+    Control padding and margin on individual sides, or set uniform spacing across all sides.
+  </Card>
+  <Card title="Layout" icon="table-columns">
+    Switch between flex and grid layouts, adjust gap, alignment, and direction for container elements.
+  </Card>
+  <Card title="Component styles" icon="paintbrush">
+    Modify border radius, box shadows, opacity, and other visual properties on individual components.
+  </Card>
+  <Card title="Responsive breakpoints" icon="mobile">
+    Apply different styles at mobile, tablet, and desktop breakpoints by selecting a viewport size in the toolbar.
+  </Card>
+</CardGroup>
+
+## Design Systems and Workspace Themes
+
+Lovable supports workspace-level themes that define your brand's colors, fonts, and base styles. Once you set a theme, every new project in your workspace inherits those brand standards automatically — so you never start from a blank slate or have to manually re-enter your brand colors for each new app.
+
+**To set up a Workspace Theme:**
+
+<Steps>
+  <Step title="Open Workspace Settings">
+    Go to **Workspace → Settings → Theme** from the top navigation.
+  </Step>
+  <Step title="Define your brand tokens">
+    Set your primary color, accent colors, neutral palette, heading font, and body font. Lovable stores these as design tokens.
+  </Step>
+  <Step title="Apply to new projects">
+    New projects created in the workspace automatically use your theme. Existing projects can be updated by prompting Lovable to "apply the workspace theme."
+  </Step>
+</Steps>
+
+<Tip>
+  Designers working from Figma can use visual editing to match specs exactly. Use the **inspect** view (the eye icon in the properties panel) to see the computed Tailwind classes for any element — making it straightforward to verify that spacing and colors match your design file precisely.
+</Tip>
+
+## AI image generation
+
+You can ask Lovable to generate custom images for your app directly in the chat. This is useful for placeholder hero images, icons, illustration sets, or any visual content you need during development.
+
+To generate an image, describe what you need in the chat — for example:
+
+> "Generate a hero image for the landing page: a clean abstract illustration of connected nodes on a dark background, in our brand blue color."
+
+Lovable generates the image, inserts it into the appropriate place in your app, and stores it in your project's assets. You can then use visual editing to adjust size, positioning, and border radius if needed.
+
+## Combining visual editing with prompts
+
+Visual editing and Agent Mode work best together:
+
+- Use **prompts** for structural changes — adding a new section, reorganizing layout, or changing a component's behavior.
+- Use **visual editing** for design refinements — adjusting exact color values, fine-tuning spacing, or matching a specific brand shade that is easier to pick than describe.
+
+This division of labor keeps your prompts focused on functionality while giving you precise control over the final look of the product.
+
+<Note>
+  Visual edits are saved as Tailwind utility classes in your component source files. They are fully visible in Code Mode and sync to GitHub alongside all other changes — your design team and engineering team see the same code.
+</Note>

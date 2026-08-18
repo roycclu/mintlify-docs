@@ -1,0 +1,80 @@
+---
+title: "Publish Your Lovable App to the Web"
+sidebarTitle: "Publish"
+description: "Deploy your Lovable app to a live public URL in one click. Every publish runs an automatic security scan before your app goes live."
+---
+
+Publishing in Lovable is as simple as clicking a button. When you're ready to share your work with the world, hit **Publish** in the top-right corner of the editor and Lovable instantly deploys the current state of your app to a publicly accessible `*.lovable.app` URL — no CI/CD pipelines, no server configuration, no deployment scripts required. Every publish automatically triggers a security scan, so your users are always protected.
+
+## How Publishing Works
+
+<Steps>
+  <Step title="Build and edit your app">
+    Make changes in the Lovable editor — chat with the AI, tweak UI visually, or edit code directly. Your work-in-progress stays in the editor and does **not** affect your live app until you explicitly publish.
+  </Step>
+  <Step title="Click Publish">
+    When you're happy with your changes, click the **Publish** button in the top-right corner of the editor. Lovable begins deploying your current app state immediately.
+  </Step>
+  <Step title="Lovable runs a security scan">
+    Before your app goes live, Lovable automatically runs a basic security scan — checking database configurations, Row Level Security (RLS) rules, cloud project settings, and common misconfiguration patterns. This takes approximately 10–15 seconds.
+  </Step>
+  <Step title="Your app is live">
+    Once the scan passes, your app is live and accessible at your `*.lovable.app` URL. Share it instantly — no additional steps needed.
+  </Step>
+</Steps>
+
+## Your App URL
+
+Every Lovable project gets a unique `*.lovable.app` subdomain the moment you first publish. This URL is permanent, shareable right away, and works on any device. You can find your live URL in the **Share** menu or in your project settings.
+
+If you want your app running under your own domain (like `app.yourcompany.com`), see [Connect a Custom Domain](/publishing/custom-domain).
+
+## Re-Publishing After Changes
+
+Lovable does not push changes to production automatically. Every time you edit your app in the editor, those changes remain in your draft state until you click **Publish** again. This gives you full control over what your users see and when.
+
+<Note>
+  Security scanning happens automatically on every publish. If the scan detects a **critical** finding, it can block the publish from completing. Workspace admins can configure this behavior — including enabling auto-fix for non-breaking findings — in the workspace Security Center.
+</Note>
+
+## Controlling Who Can See Your App
+
+By default, published apps are publicly accessible to anyone with the URL. You can change this in **Project Settings → Project Visibility**:
+
+- **Public** — anyone with the link can view your app
+- **Private** — only workspace members with explicit access can view the app
+
+Use private visibility for internal tools, works-in-progress you're not ready to share, or apps in active development.
+
+## Draft vs. Live: Team Workflows
+
+On **Business** and **Enterprise** plans, editing, approving, and publishing are enforced as separate permissions. This means:
+
+- **Editors** can make changes and iterate freely without affecting production
+- **Reviewers** can approve changes before they reach your users
+- **Publishers** control when approved changes actually go live
+
+This separation ensures no accidental deploys and gives your team a clear, auditable path from development to production. See [Use Test and Live Environments](/publishing/environments) for more on managing multi-stage workflows.
+
+<Tip>
+  Get in the habit of reviewing your changes in the editor preview before publishing — what you see in preview is exactly what your users will see after you hit Publish.
+</Tip>
+
+## What Happens to Your Previous Version?
+
+Every time you publish, Lovable saves a record of the deployment. If a new publish introduces an unexpected issue, you can roll back to a previous version from your project history. See [Environments](/publishing/environments) for details on managing Test and Live states safely.
+
+<CardGroup cols={2}>
+  <Card title="Custom Domain" icon="globe" href="/publishing/custom-domain">
+    Connect your own domain to replace the default `*.lovable.app` URL.
+  </Card>
+  <Card title="Environments" icon="flask" href="/publishing/environments">
+    Use Test and Live environments to safely preview changes before going live.
+  </Card>
+  <Card title="Lovable Cloud" icon="cloud" href="/publishing/lovable-cloud">
+    Learn about the hosting, database, and backend infrastructure behind every Lovable app.
+  </Card>
+  <Card title="Project Visibility" icon="lock" href="/workspace/overview">
+    Control who can access your published app with workspace-level visibility settings.
+  </Card>
+</CardGroup>

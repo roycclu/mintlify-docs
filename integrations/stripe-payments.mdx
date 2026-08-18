@@ -1,0 +1,109 @@
+---
+title: "Add Payments to Your Lovable App with Stripe"
+sidebarTitle: "Stripe Payments"
+description: "Accept subscriptions, one-time payments, and free trials in your Lovable app. Lovable generates the checkout flow, webhooks, and billing UI for you."
+---
+
+Stripe integration in Lovable gives you subscriptions, one-time checkout, and billing management without writing any payment logic yourself. Describe the pricing model you want and Lovable generates the checkout pages, success and failure redirects, subscription management UI, and the webhook handlers that keep your database in sync with Stripe events.
+
+## Prerequisites
+
+You need a Stripe account to get started. Stripe accounts are free to create at [stripe.com](https://stripe.com) — you only pay when you accept real payments.
+
+## Add payments to your app
+
+<Steps>
+  <Step title="Describe the pricing you want">
+    In the Lovable chat, describe your pricing model. For example:
+
+    - *"Add a Pro plan subscription at $29/month with a 14-day free trial"*
+    - *"Add a one-time payment of $49 to unlock premium features"*
+    - *"Create three pricing tiers: Starter at $9/month, Pro at $29/month, and Business at $99/month"*
+
+    Lovable generates the checkout flow, pricing page, and all supporting logic.
+  </Step>
+  <Step title="Connect your Stripe account">
+    Open **Settings → Integrations → Stripe** in your Lovable project. Enter your Stripe **Publishable key** and **Secret key** from the Stripe Dashboard under **Developers → API keys**.
+  </Step>
+  <Step title="Test in Stripe test mode">
+    Make sure your keys are test-mode keys (they start with `pk_test_` and `sk_test_`). Use Stripe's test card numbers to validate the full checkout flow before going live.
+  </Step>
+  <Step title="Verify webhooks">
+    Lovable sets up a webhook endpoint in your app automatically. In your Stripe Dashboard under **Developers → Webhooks**, confirm the endpoint is receiving events like `checkout.session.completed` and `customer.subscription.updated`.
+  </Step>
+  <Step title="Switch to live keys">
+    When you're ready to accept real payments, replace your test keys with live keys (`pk_live_` and `sk_live_`) in **Settings → Integrations → Stripe**. Republish your app and you're live.
+  </Step>
+</Steps>
+
+<Warning>
+  Always test your complete checkout flow in test mode before switching to live keys. Pay special attention to subscription webhooks — if `customer.subscription.updated` or `invoice.payment_failed` events aren't handled correctly, subscription status in your database will fall out of sync with Stripe. Test cancellations, upgrades, failed payments, and free trial expirations.
+</Warning>
+
+## Test card numbers
+
+Use these Stripe test cards to simulate different payment scenarios:
+
+| Card number | Scenario |
+|-------------|----------|
+| `4242 4242 4242 4242` | Successful payment |
+| `4000 0000 0000 0002` | Card declined |
+| `4000 0000 0000 9995` | Insufficient funds |
+| `4000 0025 0000 3155` | 3D Secure authentication required |
+
+Use any future expiry date, any 3-digit CVC, and any 5-digit postal code when testing.
+
+## What Lovable handles
+
+When you ask Lovable to add payments, it generates all of the following:
+
+<Accordion title="Checkout pages">
+  A full checkout flow using Stripe Checkout (hosted) or Stripe Elements (embedded), depending on your preference. Includes product selection, price display, and secure card input.
+</Accordion>
+
+<Accordion title="Success and failure redirects">
+  Post-payment pages that confirm successful purchases and handle failed or cancelled payments gracefully, with clear next steps for the user.
+</Accordion>
+
+<Accordion title="Subscription management UI">
+  A billing page where users can view their current plan, upcoming invoice, and payment method. Ask Lovable to "add a customer portal so users can manage their subscriptions" to get a Stripe Customer Portal integration — a pre-built billing management page with no extra code required.
+</Accordion>
+
+<Accordion title="Webhook handling">
+  Server-side webhook endpoints that listen for Stripe events and update your Supabase database accordingly. Subscription status, payment history, and plan changes are all kept in sync automatically.
+</Accordion>
+
+<Accordion title="Gated access">
+  Logic that restricts features or content to paying users. Tell Lovable "hide the export button unless the user has an active Pro subscription" and it wires up the check against your subscription data.
+</Accordion>
+
+## Supported scenarios
+
+Lovable's Stripe integration supports the full range of Stripe payment models:
+
+- **Monthly and annual subscriptions** with automatic billing
+- **One-time payments** for lifetime access or standalone products
+- **Multiple pricing tiers** (Starter, Pro, Business, Enterprise)
+- **Free trials** with configurable trial periods before the first charge
+- **Proration** when users upgrade or downgrade mid-cycle
+- **Coupon codes and discounts**
+- **Usage-based billing** (ask Lovable to describe the metering logic)
+
+## Key security
+
+Your Stripe secret key is encrypted at rest and scoped to your project. It is never exposed in client-side JavaScript or committed to your GitHub repository. Lovable uses your publishable key in the browser (safe by design) and your secret key only in server-side webhook handlers.
+
+<Tip>
+  After integrating Stripe, ask Lovable to "add a customer portal so users can manage their subscriptions." This adds a pre-built Stripe Customer Portal link to your billing page, letting users update their payment method, cancel, or change plans without any custom UI.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Supabase" icon="database" href="/integrations/supabase">
+    Understand how subscription status is stored and queried in your Supabase database.
+  </Card>
+  <Card title="Connectors" icon="plug" href="/integrations/connectors">
+    Connect Stripe alongside HubSpot, Slack, and other tools to build automated billing workflows.
+  </Card>
+</CardGroup>
